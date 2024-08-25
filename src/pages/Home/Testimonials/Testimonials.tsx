@@ -53,8 +53,11 @@ const testimonials = [
 
 function CustomerTestimonials() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <Heading Heading="Testimonials"></Heading>
+    <div className=" mx-auto px-4 bg-slate-300 my-10 sm:px-6 lg:px-8 py-12">
+      <Heading
+        Heading="What Our Clients Say About Us"
+        Text="From the most satisfied and supportive customers, we get the ultimate support for our rental service business"
+      ></Heading>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {testimonials.map((testimonial) => (
           <div
