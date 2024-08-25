@@ -21,7 +21,7 @@ const Hero = () => {
   return (
     <div>
       <div
-        className="hero min-h-screen bg-fixed"
+        className="hero min-h-screen "
         style={{
           backgroundImage: `url(${car})`,
         }}
@@ -57,7 +57,7 @@ const Hero = () => {
                     className="p-2 border border-gray-300 rounded-md"
                   />
                   <button
-                    className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-300"
+                    className="bg-[#4f46e5] text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-300"
                     onClick={handleSearch}
                   >
                     Search
