@@ -8,6 +8,7 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Navigation, Pagination, Keyboard } from "swiper/modules";
+import Heading from "../../../Component/Heading/Heading";
 const FeaturedCars = () => {
   const cars = [
     {
@@ -37,20 +38,16 @@ const FeaturedCars = () => {
   ];
   return (
     <div className="w-11/12 mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="py-10 border-b ">
-        <h2 className="text-3xl font-extrabold text-gray-900 mb-8 text-center">
-          Featured Cars
-        </h2>
-        <p>
-          "Featured Cars" presents a selection of luxury, sporty, and reliable
-          vehicles, highlighting their features, performance, and style for
-          discerning drivers.
-        </p>
+      <div>
+        <Heading
+          Heading="Featured Cars"
+          Text=" Featured Cars presents a selection of luxury, sporty, and reliablevehicles, highlighting their features, performance and style for discerning drivers"
+        ></Heading>
       </div>
       <div className="my-6">
         <>
           <Swiper
-            slidesPerView={4}
+            slidesPerView={1}
             spaceBetween={30}
             // mousewheel={true}
             centeredSlides={true}
@@ -65,11 +62,11 @@ const FeaturedCars = () => {
                 spaceBetween: 20,
               },
               768: {
-                slidesPerView: 4,
+                slidesPerView: 3,
                 spaceBetween: 40,
               },
               1024: {
-                slidesPerView: 5,
+                slidesPerView: 4,
                 spaceBetween: 50,
               },
             }}
