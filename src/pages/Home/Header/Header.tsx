@@ -8,7 +8,7 @@ import logo from "../../../assets/image/Untitled design (1).png";
 import { Link } from "react-router-dom";
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "About Us", href: "#" },
+  { name: "About Us", href: "/about-us" },
   { name: "Booking", href: "#" },
   { name: "Contact", href: "#" },
   { name: "Car Listing", href: "/car-listing" },

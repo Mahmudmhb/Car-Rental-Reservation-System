@@ -3,6 +3,7 @@
 import { useParams } from "react-router-dom";
 import { useGetSingleCarQuery } from "../../../redux/features/Car/carApi";
 import { TCar } from "../../../Component/Types/Types";
+import { MouseEvent } from "react";
 
 const CarDetails = () => {
   const { carId } = useParams();
@@ -16,7 +17,11 @@ const CarDetails = () => {
   }
   const car: TCar = data?.data;
   console.log(carId, car);
+  const additionalFeatures = ["Insurance", "GPS", "Child Seat"];
 
+  const AddFeatures = (data: MouseEvent<HTMLInputElement>) => {
+    console.log("click", data);
+  };
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Car Name and Description */}
@@ -72,20 +77,20 @@ const CarDetails = () => {
       {/* Additional Features Selection */}
       <div className="mb-8">
         <h2 className="text-2xl font-bold mb-4">Choose Additional Features</h2>
-        {/* <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4">
           {additionalFeatures.map((feature) => (
             <label key={feature} className="inline-flex items-center">
               <input
                 type="checkbox"
+                required
                 value={feature}
-                checked={selectedFeatures.includes(feature)}
-                onChange={() => toggleFeature(feature)}
+                onClick={AddFeatures}
                 className="form-checkbox text-blue-600"
               />
               <span className="ml-2 text-gray-700">{feature}</span>
             </label>
           ))}
-        </div> */}
+        </div>
       </div>
 
       {/* Book Now Button */}
