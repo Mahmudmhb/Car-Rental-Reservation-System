@@ -12,7 +12,7 @@ const initialState: CounterState = {
   value: 0,
 };
 
-export const counterSlice = createSlice({
+export const CarSlice = createSlice({
   name: "counter",
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
@@ -30,9 +30,9 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const { increment, decrement, incrementByAmount } = CarSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state;
 
-export default counterSlice.reducer;
+export default CarSlice.reducer;

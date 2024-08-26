@@ -1,16 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { pokemonApi } from "../features/Car/Api/carApi";
+import { baseApi } from "../features/Api/baseApi";
+import carReducer from "../features/Car/CarSlice";
 // ...
 
 export const store = configureStore({
   reducer: {
     // Add the generated reducer as a specific top-level slice
-    [pokemonApi.reducerPath]: pokemonApi.reducer,
+    [baseApi.reducerPath]: baseApi.reducer,
+    cars: carReducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(pokemonApi.middleware),
+    getDefaultMiddleware().concat(baseApi.middleware),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

@@ -38,12 +38,12 @@ const FeaturedCars = () => {
   ];
   return (
     <div className="w-11/12 mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div>
-        <Heading
-          Heading="Featured Cars"
-          Text=" Featured Cars presents a selection of luxury, sporty, and reliablevehicles, highlighting their features, performance and style for discerning drivers"
-        ></Heading>
-      </div>
+      <Heading
+        center="center"
+        Heading="Featured Cars"
+        Text=" Featured Cars presents a selection of luxury, sporty, and reliablevehicles, highlighting their features, performance and style for discerning drivers"
+      ></Heading>
+
       <div className="my-6">
         <>
           <Swiper

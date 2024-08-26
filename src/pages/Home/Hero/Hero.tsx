@@ -36,7 +36,7 @@ const Hero = () => {
             </h1>
             <div>
               <div className="flex flex-col items-center p-6">
-                <div className="flex items-center space-x-4">
+                <div className="md:flex items-center space-x-4">
                   <input
                     type="text"
                     placeholder="Enter location"
