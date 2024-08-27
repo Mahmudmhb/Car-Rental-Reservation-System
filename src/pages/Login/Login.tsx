@@ -1,23 +1,41 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useLoginUserMutation } from "../../redux/features/Login/loginApi";
+import { toast } from "sonner";
 
-interface FormData {
+type FormData = {
   email: string;
   password: string;
-}
+};
 
 const Login: React.FC = () => {
+  const [loginUser] = useLoginUserMutation();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
-  } = useForm<FormData>();
+  } = useForm<FormData>({
+    defaultValues: {
+      email: "user@example.com",
+      password: "password123", // Initial empty value
+    },
+  });
   const navigate = useNavigate();
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = async (data: FormData) => {
+    const toastId = toast.loading("logging in");
     console.log(data);
+    try {
+      const res = await loginUser(data).unwrap();
+      toast.success("logged in", { id: toastId, duration: 5000 });
+      console.log(res?.data.token);
+      navigate("/");
+      // toast.error("Something went wrong");
+    } catch (err) {
+      toast.error("Something went wrong", { id: toastId, duration: 5000 });
+    }
   };
 
   return (
@@ -99,9 +117,9 @@ const Login: React.FC = () => {
             >
               Forgot Password?
             </a>
-            <a href="/signup" className="text-blue-500 hover:underline">
+            <Link to="/signup" className="text-blue-500 hover:underline">
               Sign Up Instead
-            </a>
+            </Link>
           </div>
         </form>
 

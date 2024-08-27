@@ -6,6 +6,7 @@ import CarDetails from "../pages/Car Listing/car/carDetails";
 import AboutUs from "../pages/About us/AboutUs";
 import Error404 from "../pages/error/Error";
 import Login from "../pages/Login/Login";
+import Register from "../pages/Login/Register";
 
 export const route = createBrowserRouter([
   {
@@ -34,5 +35,9 @@ export const route = createBrowserRouter([
   {
     path: "login",
     element: <Login />,
+  },
+  {
+    path: "signup",
+    element: <Register />,
   },
 ]);

@@ -52,9 +52,12 @@ export default function Header() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <button className="text-sm bg-primary-color font-semibold leading-6 text-white px-3 py-1 rounded-lg">
-              Log in <span aria-hidden="true">&rarr;</span>
-            </button>
+            <Link to="/login">
+              {" "}
+              <button className="text-sm bg-primary-color font-semibold leading-6 text-white px-3 py-1 rounded-lg">
+                Log in <span aria-hidden="true">&rarr;</span>
+              </button>
+            </Link>
           </div>
         </nav>
         <Dialog
@@ -92,12 +95,12 @@ export default function Header() {
                   ))}
                 </div>
                 <div className="py-6">
-                  <a
-                    href="#"
+                  <Link
+                    to="/login"
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
                     Log in
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
