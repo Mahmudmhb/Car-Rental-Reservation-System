@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { useLoginUserMutation } from "../../redux/features/Login/loginApi";
+import { useLoginUserMutation } from "../../redux/features/auth/authApi";
 import { toast } from "sonner";
+import { useAppDispatch } from "../../redux/app/hook";
+import { signUser } from "../../redux/features/auth/authSlice";
 
 type FormData = {
   email: string;
@@ -11,6 +14,7 @@ type FormData = {
 
 const Login: React.FC = () => {
   const [loginUser] = useLoginUserMutation();
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -30,10 +34,14 @@ const Login: React.FC = () => {
     try {
       const res = await loginUser(data).unwrap();
       toast.success("logged in", { id: toastId, duration: 5000 });
-      console.log(res?.data.token);
+      const user = res?.data.user;
+      const token = res?.data.token;
+      dispatch(signUser({ user, token }));
+      console.log(res?.data.user);
+
       navigate("/");
       // toast.error("Something went wrong");
-    } catch (err) {
+    } catch (error) {
       toast.error("Something went wrong", { id: toastId, duration: 5000 });
     }
   };

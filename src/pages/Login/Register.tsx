@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useRegisterUserMutation } from "../../redux/features/Login/loginApi";
+import { useRegisterUserMutation } from "../../redux/features/auth/authApi";
 import { toast } from "sonner";
 
 interface SignUpFormData {

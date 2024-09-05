@@ -6,6 +6,8 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 import logo from "../../../assets/image/Untitled design (1).png";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../../../redux/app/hook";
+import { useCurrnetUser } from "../../../redux/features/auth/authSlice";
 const navigation = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about-us" },
@@ -16,7 +18,7 @@ const navigation = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+  const user = useAppSelector(useCurrnetUser);
   return (
     <div className="bg-white">
       <header className=" inset-x-0 border-b top-0 z-50">
@@ -52,12 +54,24 @@ export default function Header() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Link to="/login">
-              {" "}
-              <button className="text-sm bg-primary-color font-semibold leading-6 text-white px-3 py-1 rounded-lg">
-                Log in <span aria-hidden="true">&rarr;</span>
-              </button>
-            </Link>
+            {user ? (
+              <>
+                <Link to={`${user?.role}`}>
+                  <button className="text-sm bg-primary-color font-semibold leading-6 text-white px-3 py-1 rounded-lg">
+                    Dashboard
+                  </button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to="/login">
+                  {" "}
+                  <button className="text-sm bg-primary-color font-semibold leading-6 text-white px-3 py-1 rounded-lg">
+                    Log in <span aria-hidden="true">&rarr;</span>
+                  </button>
+                </Link>
+              </>
+            )}
           </div>
         </nav>
         <Dialog
@@ -94,14 +108,29 @@ export default function Header() {
                     </Link>
                   ))}
                 </div>
-                <div className="py-6">
-                  <Link
-                    to="/login"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    Log in
-                  </Link>
-                </div>
+                {user ? (
+                  <>
+                    <div className="py-6">
+                      <Link
+                        to={`${user?.role}/dashboard`}
+                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                      >
+                        Dashboard
+                      </Link>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="py-6">
+                      <Link
+                        to="/login"
+                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                      >
+                        Log in
+                      </Link>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </DialogPanel>

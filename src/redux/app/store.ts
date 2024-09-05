@@ -1,12 +1,22 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { baseApi } from "../features/Api/baseApi";
 import carReducer from "../features/Car/CarSlice";
+import loginReducer from "../features/auth/authSlice";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+
 // ...
+const persistConfig = {
+  key: "root",
+  storage,
+};
+const persistAuthReducer = persistReducer(persistConfig, loginReducer);
 
 export const store = configureStore({
   reducer: {
     // Add the generated reducer as a specific top-level slice
     [baseApi.reducerPath]: baseApi.reducer,
+    auth: persistAuthReducer,
     cars: carReducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
@@ -19,3 +29,4 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;
+export const persistor = persistStore(store);

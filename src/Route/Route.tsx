@@ -7,6 +7,12 @@ import AboutUs from "../pages/About us/AboutUs";
 import Error404 from "../pages/error/Error";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Login/Register";
+import Dashboard from "../Component/Dashboard/Dashboard";
+
+import { routeGenarator } from "../utils/routeGnarator";
+import { AdminRoute } from "./Admin.Route";
+import { UserRoute } from "./User.Route";
+import { ProtectedRoute } from "./ProtactedRoute/ProtactedRoute";
 
 export const route = createBrowserRouter([
   {
@@ -39,5 +45,23 @@ export const route = createBrowserRouter([
   {
     path: "signup",
     element: <Register />,
+  },
+  {
+    path: "/admin",
+    element: (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
+    children: routeGenarator(AdminRoute),
+  },
+  {
+    path: "/user",
+    element: (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
+    children: routeGenarator(UserRoute),
   },
 ]);
