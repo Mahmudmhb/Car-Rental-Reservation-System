@@ -13,6 +13,7 @@ import { routeGenarator } from "../utils/routeGnarator";
 import { AdminRoute } from "./Admin.Route";
 import { UserRoute } from "./User.Route";
 import { ProtectedRoute } from "./ProtactedRoute/ProtactedRoute";
+import UserUpdate from "../Component/Dashboard/User/UserManagement/UserUpdate";
 
 export const route = createBrowserRouter([
   {
@@ -63,5 +64,19 @@ export const route = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: routeGenarator(UserRoute),
+  },
+  {
+    path: "/user",
+    element: (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: "dashboard/user-update",
+        element: <UserUpdate />,
+      },
+    ],
   },
 ]);

@@ -30,14 +30,14 @@ const Login: React.FC = () => {
 
   const onSubmit = async (data: FormData) => {
     const toastId = toast.loading("logging in");
-    console.log(data);
+    // console.log(data);
     try {
       const res = await loginUser(data).unwrap();
       toast.success("logged in", { id: toastId, duration: 5000 });
-      const user = res?.data.user;
+      const userData = res?.data.user;
       const token = res?.data.token;
-      dispatch(signUser({ user, token }));
-      console.log(res?.data.user);
+      dispatch(signUser({ userData, token }));
+      // console.log(res?.data.user);
 
       navigate("/");
       // toast.error("Something went wrong");

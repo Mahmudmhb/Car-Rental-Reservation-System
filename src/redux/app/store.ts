@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { baseApi } from "../features/Api/baseApi";
 import carReducer from "../features/Car/CarSlice";
+import userReducer from "../features/user/userSlice";
 import loginReducer from "../features/auth/authSlice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
@@ -18,6 +19,7 @@ export const store = configureStore({
     [baseApi.reducerPath]: baseApi.reducer,
     auth: persistAuthReducer,
     cars: carReducer,
+    users: userReducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.

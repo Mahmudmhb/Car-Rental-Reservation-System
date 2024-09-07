@@ -22,7 +22,7 @@ interface SignUpFormData {
 //     "address": "123 Main St, City, Country"
 
 //   }
-const Register: React.FC = () => {
+const Register = () => {
   const [regiserUser] = useRegisterUserMutation();
   const {
     register,

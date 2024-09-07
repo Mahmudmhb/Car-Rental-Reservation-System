@@ -7,7 +7,7 @@ import UserManage from "../Component/Dashboard/AdminManagement/UserManage";
 export const AdminRoute = [
   {
     name: "Admin Dashboard",
-    path: "admin-dashboard",
+    path: "dashboard",
     element: <AdminDashboard />,
   },
   {

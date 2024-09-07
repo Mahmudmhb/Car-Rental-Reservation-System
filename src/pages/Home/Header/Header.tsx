@@ -8,17 +8,18 @@ import logo from "../../../assets/image/Untitled design (1).png";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../../redux/app/hook";
 import { useCurrnetUser } from "../../../redux/features/auth/authSlice";
-const navigation = [
-  { name: "Home", href: "/" },
-  { name: "About Us", href: "/about-us" },
-  { name: "Booking", href: "#" },
-  { name: "Contact", href: "#" },
-  { name: "Car Listing", href: "/car-listing" },
-];
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const user = useAppSelector(useCurrnetUser);
+
+  const navigation = [
+    { name: "Home", href: "/" },
+    { name: "About Us", href: "/about-us" },
+    { name: "Booking", href: "#" },
+    { name: "Contact", href: "#" },
+    { name: "Car Listing", href: "/car-listing" },
+  ];
   return (
     <div className="bg-white">
       <header className=" inset-x-0 border-b top-0 z-50">
@@ -56,7 +57,7 @@ export default function Header() {
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             {user ? (
               <>
-                <Link to={`${user?.role}`}>
+                <Link to={`${user?.role}/dashboard`}>
                   <button className="text-sm bg-primary-color font-semibold leading-6 text-white px-3 py-1 rounded-lg">
                     Dashboard
                   </button>

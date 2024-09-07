@@ -12,7 +12,7 @@ const userRole = {
 
 const Sidebar = () => {
   const user = useAppSelector(useCurrnetUser);
-  console.log("user", user);
+  // console.log("user", user);
 
   let SideberItems;
   switch (user?.role) {
@@ -27,16 +27,26 @@ const Sidebar = () => {
   return (
     <div>
       <Sider
+        style={{ height: "100vh", position: "sticky", top: "0", left: "0" }}
         breakpoint="lg"
         collapsedWidth="0"
-        onBreakpoint={(broken) => {
-          console.log(broken);
-        }}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
-        }}
       >
         <div className="demo-logo-vertical " />
+        <div>
+          <h1
+            style={{
+              fontSize: "20px",
+              color: "white",
+              height: "4rem",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              textTransform: "uppercase",
+            }}
+          >
+            {user?.name}
+          </h1>
+        </div>
         <Menu
           theme="dark"
           mode="inline"

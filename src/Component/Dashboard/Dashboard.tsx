@@ -4,11 +4,12 @@
 //   UserOutlined,
 //   VideoCameraOutlined,
 // } from "@ant-design/icons";
-import { Layout, theme } from "antd";
+import { Button, Layout, theme } from "antd";
 import { Outlet } from "react-router-dom";
-import { useAppSelector } from "../../redux/app/hook";
-import { useCurrnetUser } from "../../redux/features/auth/authSlice";
+import { useAppDispatch } from "../../redux/app/hook";
+import { logoutUser } from "../../redux/features/auth/authSlice";
 import Sidebar from "./Sidebar/Sidebar";
+import { Header } from "antd/es/layout/layout";
 
 const { Content } = Layout;
 
@@ -34,17 +35,25 @@ const { Content } = Layout;
 // }));
 
 const Dashboard = () => {
-  const selector = useAppSelector(useCurrnetUser);
-  console.log("selector", selector);
+  // const selector = useAppSelector(useCurrnetUser);
+  // console.log("selector", selector);
 
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
+  const dispatch = useAppDispatch();
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
   return (
     <Layout>
       <Sidebar />
       <Layout>
+        <Header>
+          {" "}
+          <Button onClick={handleLogout}>Logout</Button>{" "}
+        </Header>
         <Content style={{ margin: "24px 16px 0" }}>
           <div
             style={{
