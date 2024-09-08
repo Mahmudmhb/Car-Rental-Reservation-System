@@ -5,11 +5,13 @@ import { TCar } from "../../../types/types";
 // Define a type for the slice state
 type TCarSlice = {
   car: TCar[];
+  updateCar: TCar[];
 };
 
 // Define the initial state using that type
 const initialState: TCarSlice = {
   car: [],
+  updateCar: [],
 };
 
 export const CarSlice = createSlice({
@@ -24,12 +26,16 @@ export const CarSlice = createSlice({
       );
       state.car = filterCar;
     },
+    carUpdate: (state, action) => {
+      state.updateCar = action.payload;
+    },
   },
 });
 
-export const { getAllCar } = CarSlice.actions;
+export const { getAllCar, carUpdate } = CarSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const useCar = (state: RootState) => state.cars.car;
+export const useUpdate = (state: RootState) => state.cars.updateCar;
 
 export default CarSlice.reducer;

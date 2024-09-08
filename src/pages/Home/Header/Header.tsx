@@ -9,17 +9,17 @@ import { Link } from "react-router-dom";
 import { useAppSelector } from "../../../redux/app/hook";
 import { useCurrnetUser } from "../../../redux/features/auth/authSlice";
 
+export const navigation = [
+  { name: "Home", href: "/" },
+  { name: "About Us", href: "/about-us" },
+  { name: "Booking", href: "#" },
+  { name: "Contact", href: "#" },
+  { name: "Car Listing", href: "/car-listing" },
+];
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const user = useAppSelector(useCurrnetUser);
 
-  const navigation = [
-    { name: "Home", href: "/" },
-    { name: "About Us", href: "/about-us" },
-    { name: "Booking", href: "#" },
-    { name: "Contact", href: "#" },
-    { name: "Car Listing", href: "/car-listing" },
-  ];
   return (
     <div className="bg-white">
       <header className=" inset-x-0 border-b top-0 z-50">

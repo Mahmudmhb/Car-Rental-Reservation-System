@@ -1,53 +1,32 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm, SubmitHandler } from "react-hook-form";
 import { TCar } from "../../../Types/Types";
-import { BiEdit } from "react-icons/bi";
-import { useAppDispatch, useAppSelector } from "../../../../redux/app/hook";
-import { carUpdate, useUpdate } from "../../../../redux/features/Car/CarSlice";
-import { useUpdateCarIntoDbMutation } from "../../../../redux/features/Car/carApi";
-import { toast } from "sonner";
+import { CgAdd } from "react-icons/cg";
 
-const UpdateCar = () => {
-  const updateData: any = useAppSelector(useUpdate);
-  const dispatch = useAppDispatch();
-  const [handleUpdateData] = useUpdateCarIntoDbMutation();
-
+const AddNewCar = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<TCar>();
 
-  const onSubmitForm: SubmitHandler<TCar> = async (data) => {
-    const id = updateData._id;
-    if (typeof data.features === "string") {
-      data.features = data?.features
-        ?.split(",")
-        .map((feature: string) => feature.trim());
-    }
-    const res = await handleUpdateData({ id, data }).unwrap();
-    dispatch(carUpdate(data));
-    console.log("res data", res);
-    if (res.susscess === false) {
-      toast.error(res.message);
-    }
-    toast.success(res.message);
+  const onSubmitForm: SubmitHandler<TCar> = (data) => {
+    console.log(data);
   };
 
   return (
     <div>
       <label
-        htmlFor="my_modal_6"
+        htmlFor="my_modal_7"
         className="cursor-pointer flex gap-3 items-center"
       >
-        <BiEdit className="" />
+        <CgAdd className="text-3xl" /> Add New Car
       </label>
 
       {/* Put this part before </body> tag */}
-      <input type="checkbox" id="my_modal_6" className="modal-toggle" />
+      <input type="checkbox" id="my_modal_7" className="modal-toggle" />
       <div className="modal" role="dialog">
         <div className="modal-box w-full max-w-3xl">
-          <h3 className="text-md font-bold mb-4">Update Car Details</h3>
+          <h3 className="text-md font-bold mb-4">Add New Car Details</h3>
           <form
             onSubmit={handleSubmit(onSubmitForm)}
             className="bg-white rounded-lg text-left shadow-md p-4"
@@ -61,15 +40,19 @@ const UpdateCar = () => {
                   Car Name
                 </label>
                 <input
-                  {...register("name")}
+                  {...register("name", { required: "Car name is required" })}
                   className={`shadow appearance-none border rounded w-full py-2 px-3 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                     errors.name ? "border-red-500" : ""
                   }`}
                   id="name"
                   type="text"
-                  defaultValue={updateData?.name}
                   placeholder="Car Name"
                 />
+                {errors.name && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.name.message}
+                  </p>
+                )}
               </div>
 
               <div className="flex  gap-5 items-center ">
@@ -81,13 +64,19 @@ const UpdateCar = () => {
                     Color
                   </label>
                   <input
-                    {...register("color")}
-                    defaultValue={updateData?.color}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    {...register("color", { required: "Color is required" })}
+                    className={`shadow appearance-none border rounded w-full py-2 px-3 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                      errors.color ? "border-red-500" : ""
+                    }`}
                     id="color"
                     type="text"
                     placeholder="Car Color"
                   />
+                  {errors.color && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.color.message}
+                    </p>
+                  )}
                 </div>
                 <div className="mb-3 ">
                   <label
@@ -97,8 +86,10 @@ const UpdateCar = () => {
                     Price Per Hour
                   </label>
                   <input
-                    {...register("pricePerHour")}
-                    defaultValue={updateData?.pricePerHour}
+                    {...register("pricePerHour", {
+                      required: "Price per hour is required",
+                      valueAsNumber: true,
+                    })}
                     className={`shadow appearance-none border rounded w-full py-2 px-3 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                       errors.pricePerHour ? "border-red-500" : ""
                     }`}
@@ -106,6 +97,11 @@ const UpdateCar = () => {
                     type="number"
                     placeholder="Price per hour"
                   />
+                  {errors.pricePerHour && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.pricePerHour.message}
+                    </p>
+                  )}
                 </div>
                 <div className="mb-3 flex items-center">
                   <input
@@ -113,7 +109,6 @@ const UpdateCar = () => {
                     className="mr-2 leading-tight"
                     id="isElectric"
                     type="checkbox"
-                    defaultValue={updateData.isElectric}
                   />
                   <label className="text-sm text-gray-700" htmlFor="isElectric">
                     Electric
@@ -128,8 +123,9 @@ const UpdateCar = () => {
                   Features
                 </label>
                 <input
-                  {...register("features")}
-                  defaultValue={updateData.features}
+                  {...register("features", {
+                    required: "At least one feature is required",
+                  })}
                   className={`shadow appearance-none border rounded w-full py-2 px-3 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                     errors.features ? "border-red-500" : ""
                   }`}
@@ -137,6 +133,11 @@ const UpdateCar = () => {
                   type="text"
                   placeholder="Comma-separated features"
                 />
+                {errors.features && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.features.message}
+                  </p>
+                )}
               </div>
 
               <div className="mb-3">
@@ -164,14 +165,20 @@ const UpdateCar = () => {
                   Description
                 </label>
                 <textarea
-                  {...register("description")}
+                  {...register("description", {
+                    required: "Description is required",
+                  })}
                   className={`shadow appearance-none border rounded w-full py-2 px-3 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                     errors.description ? "border-red-500" : ""
                   }`}
                   id="description"
-                  defaultValue={updateData.description}
                   placeholder="Enter car description"
                 />
+                {errors.description && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.description.message}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -182,9 +189,9 @@ const UpdateCar = () => {
                 type="submit"
                 className="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               >
-                Update Car
+                Add New Car
               </button>
-              <label htmlFor="my_modal_6" className="btn">
+              <label htmlFor="my_modal_7" className="btn">
                 Close
               </label>
             </div>
@@ -195,4 +202,4 @@ const UpdateCar = () => {
   );
 };
 
-export default UpdateCar;
+export default AddNewCar;
