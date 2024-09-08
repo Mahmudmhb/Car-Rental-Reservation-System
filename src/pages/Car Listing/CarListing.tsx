@@ -3,6 +3,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { TFilter } from "../../Component/Types/Types";
 import { useGetAllCarQuery } from "../../redux/features/Car/carApi";
 import Car from "./car/Car";
+import { useAppDispatch, useAppSelector } from "../../redux/app/hook";
+import { getAllCar, useCar } from "../../redux/features/Car/CarSlice";
+import { useEffect } from "react";
+import { CgSpinner } from "react-icons/cg";
 
 // Sample car types for the dropdown filter
 const carTypes = ["SUV", "Hybrid", "Sedan", "Convertible", "Truck"];
@@ -16,22 +20,35 @@ const priceRanges = [
 ];
 
 const CarListing = () => {
+  const dispatch = useAppDispatch();
   const { register, handleSubmit } = useForm<TFilter>();
   const { data, isLoading } = useGetAllCarQuery(undefined);
   const cars = data?.data;
 
+  useEffect(() => {
+    if (cars?.length) {
+      dispatch(getAllCar(cars));
+    }
+  }, [cars, dispatch]);
+  const AvailableCar = useAppSelector(useCar);
+  if (isLoading) {
+    return (
+      <>
+        <CgSpinner />
+      </>
+    );
+  }
+
   const onSubmit: SubmitHandler<TFilter> = (data) => {
     console.log(data);
   };
-  if (isLoading) {
-    return <>Loading........</>;
-  }
+
   return (
     <div className="grid lg:grid-cols-4 w-11/12 mx-auto gap-3">
       <div
         className="bg-cover w-full col-span-1 bg-center p-8"
         style={{
-          backgroundImage: "url('https://via.placeholder.com/1200x800')", // Replace with your actual background image URL
+          backgroundImage: "url('https://via.placeholder.com/1200x800')",
         }}
       >
         <div className="bg-white bg-opacity-75 p-6 rounded-lg shadow-lg max-w-md mx-auto">
@@ -91,7 +108,7 @@ const CarListing = () => {
         </div>
       </div>
       <div className="col-span-3 grid md:grid-cols-2 lg:grid-cols-3 gap-3 ">
-        {cars.map((car: any) => (
+        {AvailableCar.map((car: any) => (
           <Car key={car._id} carItem={car} />
         ))}
       </div>

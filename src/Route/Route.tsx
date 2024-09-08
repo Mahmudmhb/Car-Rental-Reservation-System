@@ -66,7 +66,7 @@ export const route = createBrowserRouter([
     children: routeGenarator(UserRoute),
   },
   {
-    path: "/user",
+    path: "/",
     element: (
       <ProtectedRoute>
         <Dashboard />

@@ -1,15 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
-import { useGetMyBookQuery } from "../../../../redux/features/book/bookApi";
 
-const BookingHistory: React.FC = () => {
-  const { data, error, isLoading } = useGetMyBookQuery(undefined);
-  const bookingData = data?.data;
+import { Link } from "react-router-dom";
+import { useAppSelector } from "../../../../redux/app/hook";
+import { useBookhitory } from "../../../../redux/features/book/bookSlice";
 
-  if (isLoading) return <p className="text-center">Loading...</p>;
-  if (error)
-    return <p className="text-center text-red-500">Error fetching bookings.</p>;
-
+const BookingHistory = () => {
+  const bookingData: any = useAppSelector(useBookhitory);
   return (
     <div className="my-5">
       <div>
@@ -32,7 +28,7 @@ const BookingHistory: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {bookingData && bookingData.length > 0 ? (
+            {bookingData ? (
               bookingData.map((item: any, idx: any) => (
                 <tr key={item._id}>
                   <th>
@@ -63,7 +59,7 @@ const BookingHistory: React.FC = () => {
                     <span
                       className={`badge ${
                         item.isBooked === "confirmed"
-                          ? "badge-success"
+                          ? "badge-success text-white px-2 py-1"
                           : "badge-error"
                       }`}
                     >
@@ -71,7 +67,9 @@ const BookingHistory: React.FC = () => {
                     </span>
                   </td>
                   <td>
-                    <button className="btn btn-ghost btn-xs">Details</button>
+                    <Link to={`/car-details/${item.carId._id}`}>
+                      <button className="btn btn-ghost btn-xs">Details</button>
+                    </Link>
                   </td>
                 </tr>
               ))

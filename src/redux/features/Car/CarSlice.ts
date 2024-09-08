@@ -1,38 +1,35 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../app/store";
+import { TCar } from "../../../types/types";
 
 // Define a type for the slice state
-interface CounterState {
-  value: number;
-}
+type TCarSlice = {
+  car: TCar[];
+};
 
 // Define the initial state using that type
-const initialState: CounterState = {
-  value: 0,
+const initialState: TCarSlice = {
+  car: [],
 };
 
 export const CarSlice = createSlice({
-  name: "counter",
+  name: "Cars",
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-    // Use the PayloadAction type to declare the contents of `action.payload`
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
+    getAllCar: (state, action: PayloadAction<TCar[]>) => {
+      const totalCar = action.payload;
+      const filterCar = totalCar?.filter(
+        (item) => item.status !== "unavailable"
+      );
+      state.car = filterCar;
     },
   },
 });
 
-export const { increment, decrement, incrementByAmount } = CarSlice.actions;
+export const { getAllCar } = CarSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectCount = (state: RootState) => state;
+export const useCar = (state: RootState) => state.cars.car;
 
 export default CarSlice.reducer;

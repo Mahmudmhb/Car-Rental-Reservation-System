@@ -8,18 +8,7 @@ import {
 } from "../../../../redux/features/auth/authSlice";
 import { useUpdateUserMutation } from "../../../../redux/features/user/userApi";
 import { useNavigate } from "react-router-dom";
-
-export interface TUser {
-  name: string;
-  _id: string;
-  email: string;
-  role: string;
-  password: string;
-  confirmPassword: string;
-  phone: string;
-  address?: string;
-  termsAccepted: boolean;
-}
+import { TUser } from "../../../Types/Types";
 
 const UserUpdate = () => {
   const navigate = useNavigate();

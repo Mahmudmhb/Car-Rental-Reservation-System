@@ -2,21 +2,34 @@ import { baseApi } from "../Api/baseApi";
 
 export const bookApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    updateBooking: builder.mutation({
-      query: (bookingData) => ({
-        url: "/bookings/update",
-        method: "POST",
-        body: bookingData,
+    getAllBooked: builder.query({
+      query: () => ({
+        url: "/bookings",
+        method: "GET",
       }),
-      invalidatesTags: ["booking"], // This is appropriate for mutations
     }),
     getMyBook: builder.query({
       query: () => ({
         url: "/bookings/my-bookings",
         method: "GET",
       }),
+      providesTags: ["booking"],
+    }),
+    deleteBooked: builder.mutation({
+      query: ({ bookedId }) => {
+        console.log(bookedId);
+        return {
+          url: `/bookings/my-bookings/${bookedId}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["booking"],
     }),
   }),
 });
 
-export const { useUpdateBookingMutation, useGetMyBookQuery } = bookApi;
+export const {
+  useGetMyBookQuery,
+  useDeleteBookedMutation,
+  useGetAllBookedQuery,
+} = bookApi;

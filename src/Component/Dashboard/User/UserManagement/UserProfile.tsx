@@ -1,5 +1,5 @@
 import { MdEmail } from "react-icons/md";
-import { useAppSelector } from "../../../../redux/app/hook";
+import { useAppDispatch, useAppSelector } from "../../../../redux/app/hook";
 import { useCurrnetUser } from "../../../../redux/features/auth/authSlice";
 import { FaEdit, FaPhoneVolume } from "react-icons/fa";
 
@@ -8,11 +8,18 @@ import { Button } from "antd";
 import { Link } from "react-router-dom";
 import BookingHistory from "./BookingHistory";
 import { TUser } from "./UserUpdate";
+import { useGetMyBookQuery } from "../../../../redux/features/book/bookApi";
+import { gettAllbookedHsitory } from "../../../../redux/features/book/bookSlice";
 
 const UserProfile = () => {
   const user = useAppSelector(useCurrnetUser) as unknown as TUser;
+  const myBooked = useAppDispatch();
 
   const { address, email, name, phone } = user || null;
+  const { data, error, isLoading } = useGetMyBookQuery(undefined);
+  const bookingData = data?.data;
+  console.log("booking data", bookingData);
+  myBooked(gettAllbookedHsitory(bookingData));
 
   return (
     <div className="">
@@ -46,6 +53,10 @@ const UserProfile = () => {
           <h1>{phone}</h1>
         </div>
       </div>
+      {isLoading && <p className="text-center">Loading...</p>}{" "}
+      {error && (
+        <p className="text-center text-red-500">Error fetching bookings.</p>
+      )}
       <div>
         <BookingHistory />
       </div>
