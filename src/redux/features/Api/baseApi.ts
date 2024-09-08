@@ -53,7 +53,7 @@ const BaseQueryWithToken: BaseQueryFn<
 // Create the API service
 export const baseApi = createApi({
   reducerPath: "baseApi",
-  tagTypes: ["users", "booking"],
+  tagTypes: ["users", "booking", "cars"],
   baseQuery: BaseQueryWithToken,
   endpoints: () => ({}),
 });

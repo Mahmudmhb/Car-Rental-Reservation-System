@@ -12,7 +12,6 @@ const userRole = {
 
 const Sidebar = () => {
   const user = useAppSelector(useCurrnetUser);
-  console.log("user", user?.role);
 
   let SideberItems;
   switch (user?.role) {

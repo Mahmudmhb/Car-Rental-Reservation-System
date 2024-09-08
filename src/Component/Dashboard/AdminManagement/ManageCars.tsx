@@ -1,10 +1,17 @@
-import { useGetAllCarQuery } from "../../../redux/features/Car/carApi";
+import {
+  useDeleteCarMutation,
+  useGetAllCarQuery,
+} from "../../../redux/features/Car/carApi";
 import { CgSpinner } from "react-icons/cg";
 import { TCar } from "../../Types/Types";
 import { BiEdit, BiTrash } from "react-icons/bi";
+import { useAppDispatch } from "../../../redux/app/hook";
+import UpdateCar from "./UpdateCar/UpdateCar";
 
 const ManageCars = () => {
   const { data, isLoading } = useGetAllCarQuery(undefined);
+  const [deletedCar] = useDeleteCarMutation();
+  const dispatch = useAppDispatch();
   if (isLoading) {
     return (
       <>
@@ -14,8 +21,12 @@ const ManageCars = () => {
   }
   const totalCars = data?.data;
 
-  const handleDelete = (id: string) => {
-    console.log("deleted", id);
+  const handleDelete = async (carId: string) => {
+    const res = await deletedCar({ carId }).unwrap();
+    console.log("deleted", res);
+    if (res.success === true) {
+      // dispatch(deletedCarFromDB(carId));
+    }
   };
   const handleUpdate = (id: string) => {
     console.log("updated", id);
@@ -71,7 +82,7 @@ const ManageCars = () => {
                   <td>
                     <div className="flex gap-3 items-center text-2xl">
                       <button onClick={() => handleUpdate(item._id)}>
-                        <BiEdit className="text-red-600" />
+                        <UpdateCar />
                       </button>
                       <button onClick={() => handleDelete(item._id)}>
                         <BiTrash className="text-yellow-400 font-bold" />

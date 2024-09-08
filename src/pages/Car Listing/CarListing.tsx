@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { SubmitHandler, useForm } from "react-hook-form";
 import { TFilter } from "../../Component/Types/Types";
-import { useGetAllCarQuery } from "../../redux/features/Car/carApi";
 import Car from "./car/Car";
-import { useAppDispatch, useAppSelector } from "../../redux/app/hook";
-import { getAllCar, useCar } from "../../redux/features/Car/CarSlice";
-import { useEffect } from "react";
-import { CgSpinner } from "react-icons/cg";
+import { useAppSelector } from "../../redux/app/hook";
+import { useCar } from "../../redux/features/Car/CarSlice";
 
 // Sample car types for the dropdown filter
 const carTypes = ["SUV", "Hybrid", "Sedan", "Convertible", "Truck"];
@@ -20,24 +17,9 @@ const priceRanges = [
 ];
 
 const CarListing = () => {
-  const dispatch = useAppDispatch();
   const { register, handleSubmit } = useForm<TFilter>();
-  const { data, isLoading } = useGetAllCarQuery(undefined);
-  const cars = data?.data;
 
-  useEffect(() => {
-    if (cars?.length) {
-      dispatch(getAllCar(cars));
-    }
-  }, [cars, dispatch]);
   const AvailableCar = useAppSelector(useCar);
-  if (isLoading) {
-    return (
-      <>
-        <CgSpinner />
-      </>
-    );
-  }
 
   const onSubmit: SubmitHandler<TFilter> = (data) => {
     console.log(data);
