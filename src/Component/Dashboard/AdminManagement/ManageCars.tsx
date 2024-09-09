@@ -10,11 +10,13 @@ import AddNewCar from "./AddNewCar/AddNewCar";
 import { useAppDispatch } from "../../../redux/app/hook";
 import { carUpdate } from "../../../redux/features/Car/CarSlice";
 import UpdateCar from "./UpdateCar/UpdateCar";
+import { toast } from "sonner";
 
 const ManageCars = () => {
   const { data, isLoading } = useGetAllCarQuery(undefined);
   const [deletedCar] = useDeleteCarMutation();
   const dispatch = useAppDispatch();
+
   // const dispatch = useAppDispatch();
   if (isLoading) {
     return (
@@ -26,11 +28,9 @@ const ManageCars = () => {
   const totalCars = data?.data;
 
   const handleDelete = async (carId: string) => {
-    console.log(carId);
     const res = await deletedCar({ carId }).unwrap();
-    console.log("deleted", res);
-    if (res.success === true) {
-      // dispatch(deletedCarFromDB(carId));
+    if (res.data.deletedCount > 0) {
+      toast.success(res.message);
     }
   };
   const handleUpdate = (carInfo: TCar) => {

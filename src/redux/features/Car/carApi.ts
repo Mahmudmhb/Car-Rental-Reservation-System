@@ -34,6 +34,17 @@ const carApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["cars"],
     }),
+    addNewCarIntoDb: builder.mutation({
+      query: ({ data }) => {
+        console.log({ data });
+        return {
+          url: `/cars/`,
+          method: "POST",
+          body: data,
+        };
+      },
+      invalidatesTags: ["cars"],
+    }),
   }),
 });
 
@@ -42,4 +53,5 @@ export const {
   useGetSingleCarQuery,
   useDeleteCarMutation,
   useUpdateCarIntoDbMutation,
+  useAddNewCarIntoDbMutation,
 } = carApi;

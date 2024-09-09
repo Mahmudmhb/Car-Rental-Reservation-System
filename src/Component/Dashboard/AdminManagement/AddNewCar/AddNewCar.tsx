@@ -1,16 +1,38 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { TCar } from "../../../Types/Types";
 import { CgAdd } from "react-icons/cg";
+import { useAddNewCarIntoDbMutation } from "../../../../redux/features/Car/carApi";
+import { toast } from "sonner";
 
 const AddNewCar = () => {
+  const [AddNewCarIntoDb] = useAddNewCarIntoDbMutation();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<TCar>();
 
-  const onSubmitForm: SubmitHandler<TCar> = (data) => {
+  const onSubmitForm: SubmitHandler<TCar> = async (data) => {
     console.log(data);
+    if (typeof data.features === "string") {
+      data.features = (data.features as string)
+        ?.split(",")
+        .map((feature: string) => feature.trim());
+    }
+    const res = await AddNewCarIntoDb({ data }).unwrap();
+    if (res.success === false) {
+      toast.error(res.message);
+    }
+    toast.success(res.message, {
+      action: (
+        <>
+          <label htmlFor="my_modal_6" className="btn">
+            X
+          </label>
+        </>
+      ),
+      duration: 3000,
+    });
   };
 
   return (

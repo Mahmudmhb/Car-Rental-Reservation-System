@@ -13,18 +13,19 @@ interface Booking {
 interface BookingState {
   bookings: Booking[];
   booked: TBooked[];
+  returnCar: TBooked[];
 }
 
 const initialState: BookingState = {
   booked: [],
   bookings: [],
+  returnCar: [],
 };
 export const bookSlice = createSlice({
   name: "booked",
   initialState: initialState,
   reducers: {
     gettAllbookedHsitory: (state, action) => {
-      console.log("state ", action.payload);
       state.booked = action.payload;
     },
     // getAllBooked: (state, action: PayloadAction<Booking[]>) => {
@@ -37,14 +38,19 @@ export const bookSlice = createSlice({
       state.booked = state?.booked?.filter((item) => item._id !== id);
       console.log(state.booked);
     },
+    returnCar: (state, action: PayloadAction<TBooked[]>) => {
+      console.log(action.payload);
+      const totalBookedCar = action.payload;
+      state.returnCar = totalBookedCar.filter(
+        (item) => item.isBooked === "confirmed"
+      );
+    },
   },
 });
-export const {
-  gettAllbookedHsitory,
-
-  FilterBooked,
-} = bookSlice.actions;
+export const { gettAllbookedHsitory, FilterBooked, returnCar } =
+  bookSlice.actions;
 export const useBookhitory = (state: RootState) => state.booked.booked;
 export const useAllBooked = (state: RootState) => state.booked.booked;
+export const useReturnCar = (state: RootState) => state.booked.returnCar;
 // export const useFilterBooked = (state: RootState)=> state.booked.booked
 export default bookSlice.reducer;

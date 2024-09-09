@@ -7,6 +7,7 @@ export const bookApi = baseApi.injectEndpoints({
         url: "/bookings",
         method: "GET",
       }),
+      providesTags: ["booking"],
     }),
     getMyBook: builder.query({
       query: () => ({
@@ -19,8 +20,19 @@ export const bookApi = baseApi.injectEndpoints({
       query: ({ bookedId }) => {
         console.log(bookedId);
         return {
-          url: `/bookings/my-bookings/${bookedId}`,
+          url: `/bookings/${bookedId}`,
           method: "DELETE",
+        };
+      },
+      invalidatesTags: ["booking"],
+    }),
+
+    IsApproveBooked: builder.mutation({
+      query: ({ bookedId }) => {
+        console.log(bookedId);
+        return {
+          url: `/bookings/${bookedId}`,
+          method: "PATCH",
         };
       },
       invalidatesTags: ["booking"],
@@ -32,4 +44,5 @@ export const {
   useGetMyBookQuery,
   useDeleteBookedMutation,
   useGetAllBookedQuery,
+  useIsApproveBookedMutation,
 } = bookApi;

@@ -17,9 +17,8 @@ const AdminDashboard = () => {
 
   const bookedData = data?.data;
   dispatch(gettAllbookedHsitory(bookedData));
-  console.log("total booked", totalBooked);
 
-  const totalRevenue = totalBooked.reduce(
+  const totalRevenue = totalBooked?.reduce(
     (arr, item) => arr + Number(item?.totalCost),
     0
   );
@@ -50,7 +49,7 @@ const AdminDashboard = () => {
               Available Cars
             </h2>
             <p className="text-5xl font-bold text-yellow-900">
-              {availableCars.length}
+              {availableCars?.length}
             </p>
           </div>
           <div className="bg-red-200 shadow-md h-44 flex flex-col justify-center items-center rounded-lg p-4">
@@ -60,7 +59,7 @@ const AdminDashboard = () => {
               Total Revenue
             </h2>
             <p className="text-5xl font-bold text-red-900">
-              ${totalRevenue.toFixed(2)}
+              ${totalRevenue?.toFixed(2)}
             </p>
           </div>
           {/* Add more statistics as needed, each with a different background color */}

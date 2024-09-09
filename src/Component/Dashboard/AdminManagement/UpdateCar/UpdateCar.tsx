@@ -21,7 +21,7 @@ const UpdateCar = () => {
   const onSubmitForm: SubmitHandler<TCar> = async (data) => {
     const id = updateData._id;
     if (typeof data.features === "string") {
-      data.features = data?.features
+      data.features = (data.features as string)
         ?.split(",")
         .map((feature: string) => feature.trim());
     }
@@ -31,7 +31,17 @@ const UpdateCar = () => {
     if (res.susscess === false) {
       toast.error(res.message);
     }
-    toast.success(res.message);
+    toast.success(res.message, {
+      action: (
+        <>
+          <label htmlFor="my_modal_6" className="btn">
+            X
+          </label>
+        </>
+      ),
+      duration: 3000,
+    });
+    // toast.success(res.message);
   };
 
   return (
@@ -184,9 +194,6 @@ const UpdateCar = () => {
               >
                 Update Car
               </button>
-              <label htmlFor="my_modal_6" className="btn">
-                Close
-              </label>
             </div>
           </form>
         </div>

@@ -7,9 +7,9 @@ import { BiHome } from "react-icons/bi";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
 import BookingHistory from "./BookingHistory";
-import { TUser } from "./UserUpdate";
 import { useGetMyBookQuery } from "../../../../redux/features/book/bookApi";
 import { gettAllbookedHsitory } from "../../../../redux/features/book/bookSlice";
+import { TUser } from "../../../Types/Types";
 
 const UserProfile = () => {
   const user = useAppSelector(useCurrnetUser) as unknown as TUser;
