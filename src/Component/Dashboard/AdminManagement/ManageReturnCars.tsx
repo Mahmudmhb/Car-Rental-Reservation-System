@@ -4,6 +4,7 @@ import { useAppSelector } from "../../../redux/app/hook";
 import { useReturnCar } from "../../../redux/features/book/bookSlice";
 import { useState } from "react";
 import { useReturnCarIntoDbMutation } from "../../../redux/features/Car/carApi";
+import { toast } from "sonner";
 
 const ManageReturnCars = () => {
   const [returnCarIntoDb] = useReturnCarIntoDbMutation();
@@ -18,6 +19,9 @@ const ManageReturnCars = () => {
     console.log(data);
     const res = await returnCarIntoDb({ data }).unwrap();
     console.log(res);
+    if (res.success === true) {
+      toast.success(res.message, { duration: 1000 });
+    }
   };
   return (
     <div className="container mx-auto p-4">

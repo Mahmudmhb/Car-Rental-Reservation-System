@@ -12,6 +12,7 @@ export type TUser = {
   phone: string;
   address?: string;
   termsAccepted: boolean;
+  isBlocked?: true;
 };
 export type TCar = {
   _id: string;

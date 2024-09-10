@@ -42,7 +42,7 @@ export const bookSlice = createSlice({
       console.log(action.payload);
       const totalBookedCar = action.payload;
       state.returnCar = totalBookedCar.filter(
-        (item) => item.isBooked === "confirmed"
+        (item) => item.isBooked === "confirmed" && item.totalCost == 0
       );
     },
   },

@@ -2,6 +2,7 @@ import { useGetAllBookedQuery } from "../../../redux/features/book/bookApi";
 import { useAppDispatch, useAppSelector } from "../../../redux/app/hook";
 import {
   gettAllbookedHsitory,
+  returnCar,
   useAllBooked,
 } from "../../../redux/features/book/bookSlice";
 import { useCar } from "../../../redux/features/Car/CarSlice";
@@ -11,9 +12,12 @@ const AdminDashboard = () => {
   const totalBooked = useAppSelector(useAllBooked);
   const availableCars = useAppSelector(useCar);
   const { data, isLoading } = useGetAllBookedQuery(undefined);
+  const { data: bookData } = useGetAllBookedQuery(undefined);
+  const booked = bookData?.data;
   if (isLoading) {
     return <>loading....</>;
   }
+  dispatch(returnCar(booked));
 
   const bookedData = data?.data;
   dispatch(gettAllbookedHsitory(bookedData));
