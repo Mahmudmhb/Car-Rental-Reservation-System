@@ -8,11 +8,12 @@ import logo from "../../../assets/image/Untitled design (1).png";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../../redux/app/hook";
 import { useCurrnetUser } from "../../../redux/features/auth/authSlice";
+import { Button } from "antd";
 
 export const navigation = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about-us" },
-  { name: "Booking", href: "#" },
+  { name: "Booking", href: "/booking" },
   { name: "Contact", href: "#" },
   { name: "Car Listing", href: "/car-listing" },
 ];
@@ -58,9 +59,9 @@ export default function Header() {
             {user ? (
               <>
                 <Link to={`${user?.role}/dashboard`}>
-                  <button className="text-sm bg-primary-color font-semibold leading-6 text-white px-3 py-1 rounded-lg">
+                  <Button className="text-sm bg-primary-color font-semibold leading-6 text-white px-3 py-1 rounded-lg">
                     Dashboard
-                  </button>
+                  </Button>
                 </Link>
               </>
             ) : (

@@ -14,6 +14,7 @@ import { AdminRoute } from "./Admin.Route";
 import { UserRoute } from "./User.Route";
 import { ProtectedRoute } from "./ProtactedRoute/ProtactedRoute";
 import UserUpdate from "../Component/Dashboard/User/UserManagement/UserUpdate";
+import BookingForm from "../Component/Dashboard/User/Booking/BookingFrom";
 
 export const route = createBrowserRouter([
   {
@@ -36,6 +37,15 @@ export const route = createBrowserRouter([
       {
         path: "about-us",
         element: <AboutUs />,
+      },
+      {
+        path: "booking",
+        element: (
+          <ProtectedRoute>
+            {" "}
+            <BookingForm />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

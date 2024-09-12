@@ -9,33 +9,24 @@ import "swiper/css/pagination";
 // import required modules
 import { Navigation, Pagination, Keyboard } from "swiper/modules";
 import Heading from "../../../Component/Heading/Heading";
+import { useGetAllCarQuery } from "../../../redux/features/Car/carApi";
+import Car from "../../Car Listing/car/Car";
 const FeaturedCars = () => {
-  const cars = [
-    {
-      id: 1,
-      name: "Tesla Model S",
-      price: "$79,990",
-      image: "https://example.com/tesla-model-s.jpg",
-    },
-    {
-      id: 2,
-      name: "Ford Mustang",
-      price: "$55,300",
-      image: "https://example.com/ford-mustang.jpg",
-    },
-    {
-      id: 3,
-      name: "Audi Q7",
-      price: "$71,900",
-      image: "https://example.com/audi-q7.jpg",
-    },
-    {
-      id: 4,
-      name: "BMW 3 Series",
-      price: "$45,600",
-      image: "https://example.com/bmw-3-series.jpg",
-    },
-  ];
+  const { data, isLoading } = useGetAllCarQuery(undefined);
+
+  if (isLoading) {
+    return (
+      <div>
+        <p>Lodding.......</p>
+      </div>
+    );
+  }
+  const products = data?.data;
+
+  const letestProduct = [...products].sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
+
   return (
     <div className="w-11/12 mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <Heading
@@ -47,7 +38,7 @@ const FeaturedCars = () => {
       <div className="my-6">
         <>
           <Swiper
-            slidesPerView={1}
+            slidesPerView={4}
             spaceBetween={30}
             // mousewheel={true}
             centeredSlides={true}
@@ -76,12 +67,13 @@ const FeaturedCars = () => {
             {" "}
             <div>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                {cars.map((car) => (
+                {letestProduct?.slice(0, 6).map((car) => (
                   <SwiperSlide>
                     {" "}
-                    <div
+                    <Car key={car._id} carItem={car} />
+                    {/* <div
                       key={car.id}
-                      className="bg-white shadow-md rounded-lg overflow-hidden"
+                      className="bg-white h-96  shadow-md rounded-lg overflow-hidden"
                     >
                       <img
                         className="w-full h-48 object-cover"
@@ -97,7 +89,7 @@ const FeaturedCars = () => {
                           View Details
                         </button>
                       </div>
-                    </div>
+                    </div> */}
                   </SwiperSlide>
                 ))}
               </div>

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../app/store";
-import { TBooked } from "../../../types/types";
+import { IBookingForm, TBooked } from "../../../Component/Types/Types";
 
 interface Booking {
   id: string;
@@ -14,12 +14,14 @@ interface BookingState {
   bookings: Booking[];
   booked: TBooked[];
   returnCar: TBooked[];
+  bookedCar: IBookingForm[];
 }
 
 const initialState: BookingState = {
   booked: [],
   bookings: [],
   returnCar: [],
+  bookedCar: [],
 };
 export const bookSlice = createSlice({
   name: "booked",
@@ -45,12 +47,17 @@ export const bookSlice = createSlice({
         (item) => item.isBooked === "confirmed" && item.totalCost == 0
       );
     },
+    bookedCar: (state, action) => {
+      console.log(action.payload);
+      state.bookedCar = action.payload;
+    },
   },
 });
-export const { gettAllbookedHsitory, FilterBooked, returnCar } =
+export const { gettAllbookedHsitory, bookedCar, FilterBooked, returnCar } =
   bookSlice.actions;
 export const useBookhitory = (state: RootState) => state.booked.booked;
 export const useAllBooked = (state: RootState) => state.booked.booked;
 export const useReturnCar = (state: RootState) => state.booked.returnCar;
+export const useBookedCar = (state: RootState) => state.booked.bookedCar;
 // export const useFilterBooked = (state: RootState)=> state.booked.booked
 export default bookSlice.reducer;

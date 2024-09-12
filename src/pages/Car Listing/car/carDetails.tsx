@@ -1,11 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Define the Car type
 
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGetSingleCarQuery } from "../../../redux/features/Car/carApi";
 import { TCar } from "../../../Component/Types/Types";
-import { MouseEvent } from "react";
+import InnerImageZoom from "react-inner-image-zoom";
+import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
+import { bookedCar } from "../../../redux/features/book/bookSlice";
+import { useAppDispatch } from "../../../redux/app/hook";
+import { Button } from "antd";
 
 const CarDetails = () => {
+  const dispatch = useAppDispatch();
   const { carId } = useParams();
   const { data, isLoading } = useGetSingleCarQuery(carId);
   if (isLoading) {
@@ -19,29 +25,24 @@ const CarDetails = () => {
   console.log(carId, car);
   const additionalFeatures = ["Insurance", "GPS", "Child Seat"];
 
-  const AddFeatures = (data: MouseEvent<HTMLInputElement>) => {
-    console.log("click", data);
+  const AddFeatures = (data: any) => {
+    const Features = { ...car, AdditionalFeatures: data };
+
+    dispatch(bookedCar(Features));
   };
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      {/* Car Name and Description */}
+    <div className="w-11/12 mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <figure>
+        <InnerImageZoom
+          src={car?.image}
+          zoomSrc={car?.image}
+          zoomType="hover"
+          zoomScale={1.5}
+        />
+      </figure>
       <h1 className="text-4xl font-bold mb-4">{car.name}</h1>
       <p className="text-gray-600 mb-8">{car.description}</p>
 
-      {/* Image Gallery with Zoom Functionality */}
-      {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-       
-          <div  className="overflow-hidden rounded-lg shadow-md">
-            <img
-              src={image}
-              alt={`${car.name} `}
-              className="w-full h-full object-cover transform hover:scale-105 transition duration-300"
-            />
-          </div>
-        
-      </div> */}
-
-      {/* Car Features, Pricing, and Availability */}
       <div className="mb-8">
         <h2 className="text-2xl font-bold mb-4">Features</h2>
         <ul className="list-disc list-inside space-y-2">
@@ -74,7 +75,6 @@ const CarDetails = () => {
         ))}
       </div> */}
 
-      {/* Additional Features Selection */}
       <div className="mb-8">
         <h2 className="text-2xl font-bold mb-4">Choose Additional Features</h2>
         <div className="flex flex-wrap gap-4">
@@ -84,7 +84,7 @@ const CarDetails = () => {
                 type="checkbox"
                 required
                 value={feature}
-                onClick={AddFeatures}
+                onClick={() => AddFeatures(event.target.value)}
                 className="form-checkbox text-blue-600"
               />
               <span className="ml-2 text-gray-700">{feature}</span>
@@ -94,12 +94,14 @@ const CarDetails = () => {
       </div>
 
       {/* Book Now Button */}
-      <button
-        className="w-full bg-blue-500 text-white py-3 rounded-md hover:bg-blue-600 transition duration-300"
-        onClick={() => console.log("Redirecting to booking page...")}
-      >
-        Book Now
-      </button>
+      <Button>
+        <Link
+          to="/booking"
+          className=" py-3 rounded-md  transition duration-300"
+        >
+          Book Now
+        </Link>
+      </Button>
     </div>
   );
 };
