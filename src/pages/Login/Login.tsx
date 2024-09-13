@@ -29,11 +29,11 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data: FormData) => {
-    const toastId = toast.loading("logging in");
+    const toastId = toast.loading("logging in", { duration: 1000 });
     // console.log(data);
     try {
       const res = await loginUser(data).unwrap();
-      toast.success("logged in", { id: toastId, duration: 5000 });
+      toast.success("logged in", { id: toastId, duration: 1000 });
       const userData = res?.data.user;
       const token = res?.data.token;
       dispatch(signUser({ userData, token }));
@@ -42,7 +42,7 @@ const Login: React.FC = () => {
       navigate("/");
       // toast.error("Something went wrong");
     } catch (error) {
-      toast.error("Something went wrong", { id: toastId, duration: 5000 });
+      toast.error("Something went wrong", { id: toastId, duration: 1000 });
     }
   };
 

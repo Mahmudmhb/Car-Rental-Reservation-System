@@ -10,8 +10,10 @@ const ManageReturnCars = () => {
   const [returnCarIntoDb] = useReturnCarIntoDbMutation();
   const [endTime, setEndTime] = useState("");
   const useManageReturnCar = useAppSelector(useReturnCar);
+  console.log("use car", useManageReturnCar);
 
   const handleReturnCar = async (id: string) => {
+    console.log("id", id);
     const data = {
       bookingId: id,
       endTime,
@@ -29,12 +31,13 @@ const ManageReturnCars = () => {
       <div className="overflow-x-auto p-4">
         <form>
           <table className="table w-full">
-            <thead>
-              <tr className="text-sm text-red-500">
+            <thead className="text-black bg-slate-300">
+              <tr>
                 <th>Sl</th>
                 <th>Car Name</th>
-                <th>Booking Date</th>
+
                 <th>Start Time</th>
+                <th>End Time</th>
                 <th>Total Cost</th>
                 <th>Action</th>
               </tr>
@@ -50,22 +53,22 @@ const ManageReturnCars = () => {
                       <div className="flex items-center gap-3">
                         <div className="avatar">
                           <div className="mask mask-squircle h-12 w-12">
-                            <img src="/src/assets/image/image.png" alt="" />
+                            <img src={item.carId.image} alt="" />
                           </div>
                         </div>
                         <div>
                           <div className="font-bold">
-                            {item.carId?.name || "Unknown Car"}
+                            {item?.carId?.name || "Unknown Car"}
                           </div>
                           <div className="text-sm opacity-50">
-                            {item.carId?.description || "No Description"}
+                            {item.carId.description || "No Description"}
                           </div>
                         </div>
                       </div>
                     </td>
-                    <td>{item.date}</td>
-                    <td>{item.startTime}</td>
+                    <td>{item.payment?.startTime}</td>
 
+                    <td>{item.endTime}</td>
                     <td>${item.totalCost}</td>
 
                     {/* <td></td> */}
@@ -98,7 +101,7 @@ const ManageReturnCars = () => {
                                 required
                               />
                             </p>
-                            <Button onClick={() => handleReturnCar(item._id)}>
+                            <Button onClick={() => handleReturnCar(item)}>
                               Submit
                             </Button>
                             <div className="modal-action">

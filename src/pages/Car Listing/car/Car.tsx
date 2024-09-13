@@ -6,8 +6,6 @@ type TCarItem = {
 };
 
 const Car = ({ carItem }: TCarItem) => {
-  console.log(carItem);
-
   return (
     <div>
       <div className="card bg-base-100 h-96 w-[300px] shadow-xl">

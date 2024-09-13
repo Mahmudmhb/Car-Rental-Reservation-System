@@ -2,6 +2,16 @@ import { baseApi } from "../Api/baseApi";
 
 export const bookApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    addBooked: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/bookings",
+          method: "POST",
+          body: data,
+        };
+      },
+      invalidatesTags: ["booking"],
+    }),
     getAllBooked: builder.query({
       query: () => ({
         url: "/bookings",
@@ -18,7 +28,6 @@ export const bookApi = baseApi.injectEndpoints({
     }),
     deleteBooked: builder.mutation({
       query: ({ bookedId }) => {
-        console.log(bookedId);
         return {
           url: `/bookings/${bookedId}`,
           method: "DELETE",
@@ -29,10 +38,19 @@ export const bookApi = baseApi.injectEndpoints({
 
     IsApproveBooked: builder.mutation({
       query: ({ bookedId }) => {
-        console.log(bookedId);
         return {
           url: `/bookings/${bookedId}`,
           method: "PATCH",
+        };
+      },
+      invalidatesTags: ["booking"],
+    }),
+    paymentOfCustomer: builder.mutation({
+      query: ({ payment }) => {
+        return {
+          url: "bookings/payment",
+          method: "POST",
+          body: payment,
         };
       },
       invalidatesTags: ["booking"],
@@ -45,4 +63,6 @@ export const {
   useDeleteBookedMutation,
   useGetAllBookedQuery,
   useIsApproveBookedMutation,
+  useAddBookedMutation,
+  usePaymentOfCustomerMutation,
 } = bookApi;

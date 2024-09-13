@@ -30,26 +30,23 @@ export type TCar = {
 };
 
 export type IBookingForm = {
+  _id?: string;
   nidOrPassport: string;
   drivingLicense: string;
   cardNumber: string;
   expirationDate: string;
   cvv: string;
-  gps: boolean;
-  childSeat: boolean;
   startTime: string;
 };
-
 export type TBooked = {
-  _id: string;
-  date: string;
+  _id?: string;
   user?: string;
-  carId: string;
-  startTime: string;
+  carId?: string;
   endTime?: string;
   totalCost?: number;
   isBooked?: "unconfirmed" | "confirmed";
   isDeleted?: boolean;
+  payment?: IBookingForm;
 };
 
 export interface Filters {

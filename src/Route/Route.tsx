@@ -84,7 +84,7 @@ export const route = createBrowserRouter([
     ),
     children: [
       {
-        path: "dashboard/user-update",
+        path: "user/dashboard/user-update",
         element: <UserUpdate />,
       },
     ],

@@ -194,6 +194,10 @@ const UpdateCar = () => {
               >
                 Update Car
               </button>
+
+              <label htmlFor="my_modal_6" className="btn">
+                Close!
+              </label>
             </div>
           </form>
         </div>

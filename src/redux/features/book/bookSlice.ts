@@ -47,7 +47,7 @@ export const bookSlice = createSlice({
         (item) => item.isBooked === "confirmed" && item.totalCost == 0
       );
     },
-    bookedCar: (state, action) => {
+    bookedCar: (state, action: PayloadAction<IBookingForm[]>) => {
       console.log(action.payload);
       state.bookedCar = action.payload;
     },

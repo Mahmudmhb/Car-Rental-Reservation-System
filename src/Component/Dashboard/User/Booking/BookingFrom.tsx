@@ -1,24 +1,39 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm, SubmitHandler } from "react-hook-form";
-import { IBookingForm, TCar } from "../../../Types/Types";
 import { useAppSelector } from "../../../../redux/app/hook";
 import { useBookedCar } from "../../../../redux/features/book/bookSlice";
 import { Button } from "antd";
 import FeaturedCars from "../../../../pages/Home/FeaturedCars/FeaturedCars";
+import { useAddBookedMutation } from "../../../../redux/features/book/bookApi";
 
 const BookingForm = () => {
-  const useBooked: TCar = useAppSelector(useBookedCar);
-  console.log(useBooked);
+  const [addBooked] = useAddBookedMutation();
+  const useBooked: any = useAppSelector(useBookedCar);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IBookingForm>();
+  } = useForm<any>();
 
-  const onSubmit: SubmitHandler<IBookingForm> = async (data) => {
+  const onSubmit: SubmitHandler<any> = async (data) => {
     console.log("Form data:", data);
+    const carId = useBooked?._id;
+    const bookedInfo = {
+      payment: { ...data, status: "Panding" },
+      carId: carId,
+    };
+    const res = await addBooked(bookedInfo).unwrap();
+    console.log(res);
+    console.log(bookedInfo);
     // Implement form submission logic here
     // e.g., send data to an API endpoint
   };
+
+  //   {
+  //     "carId": "66dea312493f2b2ccacc4ac3",
+  //     "date": "2024-01-15",
+  //     "startTime": "17:00"
+  //  }
 
   return (
     <div>
@@ -47,11 +62,6 @@ const BookingForm = () => {
                   errors.nidOrPassport ? "border-red-500" : ""
                 }`}
               />
-              {errors.nidOrPassport && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.nidOrPassport.message}
-                </p>
-              )}
             </div>
 
             <div className="mb-4">
@@ -71,11 +81,6 @@ const BookingForm = () => {
                   errors.drivingLicense ? "border-red-500" : ""
                 }`}
               />
-              {errors.drivingLicense && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.drivingLicense.message}
-                </p>
-              )}
             </div>
 
             <div className="mb-4">
@@ -95,11 +100,6 @@ const BookingForm = () => {
                   errors.cardNumber ? "border-red-500" : ""
                 }`}
               />
-              {errors.cardNumber && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.cardNumber.message}
-                </p>
-              )}
             </div>
 
             <div className="mb-4">
@@ -119,11 +119,6 @@ const BookingForm = () => {
                   errors.expirationDate ? "border-red-500" : ""
                 }`}
               />
-              {errors.expirationDate && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.expirationDate.message}
-                </p>
-              )}
             </div>
 
             <div className="mb-4">
@@ -141,45 +136,6 @@ const BookingForm = () => {
                   errors.cvv ? "border-red-500" : ""
                 }`}
               />
-              {errors.cvv && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.cvv.message}
-                </p>
-              )}
-            </div>
-
-            <div className="mb-4">
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  id="gps"
-                  {...register("gps")}
-                  className="mr-2"
-                />
-                <label
-                  htmlFor="gps"
-                  className="text-sm font-medium text-gray-700"
-                >
-                  GPS
-                </label>
-              </div>
-            </div>
-
-            <div className="mb-4">
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  id="childSeat"
-                  {...register("childSeat")}
-                  className="mr-2"
-                />
-                <label
-                  htmlFor="childSeat"
-                  className="text-sm font-medium text-gray-700"
-                >
-                  Child Seat
-                </label>
-              </div>
             </div>
           </div>
 
@@ -190,7 +146,7 @@ const BookingForm = () => {
               </div>
 
               <div className="space-y-3">
-                <h1 className="text-xl ">{useBooked.name}</h1>
+                <h1 className="text-xl font-bold ">{useBooked.name}</h1>
                 <h1>
                   Price Per Hour:{" "}
                   <span className="badge">${useBooked.pricePerHour}</span>
@@ -211,6 +167,7 @@ const BookingForm = () => {
                   Order Date and Time:
                 </label>
                 <input
+                  className="border-2 px-2"
                   type="datetime-local"
                   {...register("startTime", {
                     required: "Time and date is required",

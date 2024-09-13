@@ -6,15 +6,17 @@ import {
   useIsApproveBookedMutation,
 } from "../../../redux/features/book/bookApi";
 import { Button } from "antd";
-import { TBooked } from "../../../types/types";
 import { useAppDispatch } from "../../../redux/app/hook";
 import { returnCar } from "../../../redux/features/book/bookSlice";
+import { TBooked } from "../../Types/Types";
 
 const ManageBookings = () => {
   const dispatch = useAppDispatch();
   const { data } = useGetAllBookedQuery(undefined);
   const booked = data?.data;
-  dispatch(returnCar(booked));
+  if (booked) {
+    dispatch(returnCar(booked));
+  }
   const [deletedBooked] = useDeleteBookedMutation();
   const [isBookedAprroved] = useIsApproveBookedMutation();
 
@@ -36,14 +38,15 @@ const ManageBookings = () => {
       <h1 className="text-2xl font-bold mb-4">Booking Management</h1>
       <div className="overflow-x-auto p-4">
         <table className="table w-full">
-          <thead>
-            <tr className="text-sm text-red-500">
+          <thead className="bg-slate-300 text-black">
+            <tr>
               <th>Sl</th>
               <th>Car Name</th>
               <th>Booking Date</th>
               <th>Start Time</th>
               <th>End Time</th>
               <th>Total Cost</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>

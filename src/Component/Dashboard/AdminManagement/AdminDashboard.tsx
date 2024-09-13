@@ -17,16 +17,20 @@ const AdminDashboard = () => {
   if (isLoading) {
     return <>loading....</>;
   }
-  dispatch(returnCar(booked));
+  if (booked) {
+    dispatch(returnCar(booked));
+  }
 
   const bookedData = data?.data;
-  dispatch(gettAllbookedHsitory(bookedData));
+  if (bookedData) {
+    dispatch(gettAllbookedHsitory(bookedData));
+  }
 
-  const totalRevenue = totalBooked?.reduce(
+  const totalRevenue = totalBooked.reduce(
     (arr, item) => arr + Number(item?.totalCost),
     0
   );
-  console.log(totalRevenue);
+
   return (
     <div>
       <div className="p-6 bg-gray-50 min-h-screen">
