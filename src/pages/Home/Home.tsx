@@ -11,10 +11,8 @@ import CustomerTestimonials from "./Testimonials/Testimonials";
 
 const Home = () => {
   const dispatch = useAppDispatch();
-  const { data, isLoading } = useGetAllCarQuery(undefined);
-  if (isLoading) {
-    return <>loading.....</>;
-  }
+  const { data } = useGetAllCarQuery(undefined);
+
   const cars = data?.data || [];
   dispatch(getAllCar(cars));
   return (

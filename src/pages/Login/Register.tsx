@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useRegisterUserMutation } from "../../redux/features/auth/authApi";
@@ -13,15 +12,7 @@ interface SignUpFormData {
   termsAccepted: boolean;
   role?: "user";
 }
-// {
-//     "name": "John Doe",
-//     "email": "johndoe1@example.com",
-//     "role": "user",  // role can be user or admin
-//     "password": "password123",
-//     "phone": "1234567890",
-//     "address": "123 Main St, City, Country"
 
-//   }
 const Register = () => {
   const [regiserUser] = useRegisterUserMutation();
   const {
@@ -47,11 +38,9 @@ const Register = () => {
       });
       console.log(res);
       navigate("/login");
-      // toast.error("Something went wrong");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       if ("data" in err) {
-        // Type guard to check if 'err' is a FetchBaseQueryError with a 'data' property
         toast.error(
           err.data.message || "An error occurred during registration."
         );
@@ -59,10 +48,8 @@ const Register = () => {
         toast.error("An unexpected error occurred. Please try again.");
       }
     }
-    // navigate("/login");
   };
 
-  // Watch the password field for matching validation
   const password = watch("password");
 
   return (
@@ -71,7 +58,6 @@ const Register = () => {
         <h2 className="text-2xl font-bold text-center mb-6">Sign Up</h2>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {/* Name Field */}
           <div>
             <label
               htmlFor="name"
@@ -92,7 +78,6 @@ const Register = () => {
             )}
           </div>
 
-          {/* Email Field */}
           <div>
             <label
               htmlFor="email"
@@ -121,7 +106,6 @@ const Register = () => {
             )}
           </div>
 
-          {/* Password Field */}
           <div>
             <label
               htmlFor="password"
@@ -150,7 +134,6 @@ const Register = () => {
             )}
           </div>
 
-          {/* Confirm Password Field */}
           <div>
             <label
               htmlFor="confirmPassword"
@@ -177,7 +160,6 @@ const Register = () => {
             )}
           </div>
 
-          {/* Phone Number Field (Optional) */}
           <div>
             <label
               htmlFor="phone"
@@ -193,7 +175,6 @@ const Register = () => {
             />
           </div>
 
-          {/* Terms and Conditions Checkbox */}
           <div className="flex items-center">
             <input
               type="checkbox"
@@ -219,7 +200,6 @@ const Register = () => {
             </p>
           )}
 
-          {/* Sign Up Button */}
           <button
             type="submit"
             className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
@@ -227,7 +207,6 @@ const Register = () => {
             Sign Up
           </button>
 
-          {/* Sign In Instead Link */}
           <div className="text-center text-sm">
             <a href="/login" className="text-blue-500 hover:underline">
               Sign In Instead
@@ -235,13 +214,12 @@ const Register = () => {
           </div>
         </form>
 
-        {/* Footer */}
         <div className="mt-6 text-center text-sm text-gray-500">
           <a href="/privacy-policy" className="hover:underline">
             Privacy Policy
           </a>{" "}
           &bull;{" "}
-          <a href="/terms-of-service" className="hover:underline">
+          <a href="/privacy-policy" className="hover:underline">
             Terms of Service
           </a>
         </div>

@@ -7,15 +7,10 @@ const Hero = () => {
   const [endDate, setEndDate] = useState("");
 
   const handleBookNow = () => {
-    alert(`Booking from ${startDate} to ${endDate} at ${location}`);
-    console.log("object");
     // You can add more logic here to handle the booking action
   };
 
   const handleSearch = () => {
-    console.log(
-      `Searching cars from ${startDate} to ${endDate} at ${location}`
-    );
     // Add your search logic here
   };
 
@@ -57,12 +52,14 @@ const Hero = () => {
                     onChange={(e) => setEndDate(e.target.value)}
                     className="p-2 border border-gray-300 rounded-md"
                   />
-                  <button
-                    className="bg-[#4f46e5] text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-300"
-                    onClick={handleSearch}
-                  >
-                    Search
-                  </button>
+                  <Link to="/car-listing">
+                    <button
+                      className="bg-[#4f46e5] text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-300"
+                      onClick={handleSearch}
+                    >
+                      Search
+                    </button>
+                  </Link>
                 </div>
                 <div className="w-full mt-5  flex justify-center items-center mb-6">
                   <Link to="/car-listing">

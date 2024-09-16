@@ -14,7 +14,7 @@ import { Button } from "antd";
 export const navigation = [
   { name: "Home", href: "/" },
   { name: "Car List", href: "/car-listing" },
-  { name: "Contact", href: "#" },
+  { name: "Contact", href: "/contact-us" },
   { name: "About Us", href: "/about-us" },
 ];
 export default function Header() {
@@ -23,7 +23,7 @@ export default function Header() {
 
   return (
     <div className="bg-white">
-      <header className=" inset-x-0 border-b top-0 z-50">
+      <header className=" inset-x-0 w-11/12 mx-auto border-b top-0 z-50">
         <nav
           aria-label="Global"
           className="flex items-center justify-between   lg:px-8"

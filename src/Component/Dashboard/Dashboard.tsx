@@ -14,31 +14,7 @@ import { navigation } from "../../pages/Home/Header/Header";
 
 const { Content } = Layout;
 
-// const userRoutes = ProtectedRoute.map((item) => ({
-//   key: item.label,
-//   label: <NavLink to={`/dashboard/${item.label}`}>{item.name}</NavLink>,
-//   // path: item.label,
-// }));
-// switch(){
-//   case(user ==="user"):
-//   route
-
-// }
-// const items = [
-//   UserOutlined,
-//   VideoCameraOutlined,
-//   UploadOutlined,
-//   UserOutlined,
-// ].map((icon, index) => ({
-//   key: String(index + 1),
-//   icon: React.createElement(icon),
-//   label: `nav ${index + 1}`,
-// }));
-
 const Dashboard = () => {
-  // const selector = useAppSelector(useCurrnetUser);
-  // console.log("selector", selector);
-
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();

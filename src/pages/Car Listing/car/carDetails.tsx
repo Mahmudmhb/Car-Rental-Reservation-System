@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// Define the Car type
-
 import { Link, useParams } from "react-router-dom";
 import { useGetSingleCarQuery } from "../../../redux/features/Car/carApi";
 import { TCar } from "../../../Component/Types/Types";
@@ -9,11 +7,14 @@ import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
 import { bookedCar } from "../../../redux/features/book/bookSlice";
 import { useAppDispatch } from "../../../redux/app/hook";
 import { Button } from "antd";
+import { useState } from "react";
 
 const CarDetails = () => {
   const dispatch = useAppDispatch();
   const { carId } = useParams();
   const { data, isLoading } = useGetSingleCarQuery(carId);
+  const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
+
   if (isLoading) {
     return (
       <>
@@ -21,16 +22,29 @@ const CarDetails = () => {
       </>
     );
   }
+
   const car: TCar = data?.data;
   const additionalFeatures = ["Insurance", "GPS", "Child Seat"];
 
-  const AddFeatures = (data: any) => {
-    const Features = { ...car, AdditionalFeatures: data };
+  const AddFeatures = (feature: string) => {
+    let updatedFeatures: string[];
 
-    dispatch(bookedCar(Features));
+    if (selectedFeatures.includes(feature)) {
+      updatedFeatures = selectedFeatures.filter((f) => f !== feature);
+    } else {
+      updatedFeatures = [...selectedFeatures, feature];
+    }
+
+    setSelectedFeatures(updatedFeatures);
+
+    const updatedCar: any = { ...car, AdditionalFeatures: updatedFeatures };
+    dispatch(bookedCar(updatedCar));
   };
+
   return (
-    <div className="w-11/12 mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="w-11/12 mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-5">
+      <h1 className="text-4xl font-bold mb-4">{car.name}</h1>
+
       <figure>
         <InnerImageZoom
           src={car?.image}
@@ -40,6 +54,7 @@ const CarDetails = () => {
         />
       </figure>
       <h1 className="text-4xl font-bold mb-4">{car.name}</h1>
+
       <p className="text-gray-600 mb-8">{car.description}</p>
 
       <div className="mb-8">
@@ -62,18 +77,6 @@ const CarDetails = () => {
         </div>
       </div>
 
-      {/* Customer Reviews */}
-      {/* <div className="mb-8">
-        <h2 className="text-2xl font-bold mb-4">Customer Reviews</h2>
-        {car.reviews.map((review, index) => (
-          <div key={index} className="bg-gray-100 p-4 rounded-lg mb-4">
-            <p className="font-semibold text-gray-800">{review.author}</p>
-            <p className="text-gray-600">{review.content}</p>
-            <p className="text-yellow-500">{"★".repeat(review.rating)}</p>
-          </div>
-        ))}
-      </div> */}
-
       <div className="mb-8">
         <h2 className="text-2xl font-bold mb-4">Choose Additional Features</h2>
         <div className="flex flex-wrap gap-4">
@@ -81,9 +84,8 @@ const CarDetails = () => {
             <label key={feature} className="inline-flex items-center">
               <input
                 type="checkbox"
-                required
                 value={feature}
-                onClick={() => AddFeatures(event.target.value)}
+                onChange={() => AddFeatures(feature)}
                 className="form-checkbox text-blue-600"
               />
               <span className="ml-2 text-gray-700">{feature}</span>
@@ -92,8 +94,7 @@ const CarDetails = () => {
         </div>
       </div>
 
-      {/* Book Now Button */}
-      <Button>
+      <Button className="bg-primary-color w-full text-white text-center rounded-lg">
         <Link
           to="/booking"
           className=" py-3 rounded-md  transition duration-300"

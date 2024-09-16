@@ -1,13 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useAppSelector } from "../../../../redux/app/hook";
-import { useBookedCar } from "../../../../redux/features/book/bookSlice";
+import { useAppDispatch, useAppSelector } from "../../../../redux/app/hook";
+import {
+  confiremBooking,
+  useBookedCar,
+} from "../../../../redux/features/book/bookSlice";
 import { Button } from "antd";
-import { useAddBookedMutation } from "../../../../redux/features/book/bookApi";
+
+import { useNavigate } from "react-router-dom";
 
 const BookingForm = () => {
-  const [addBooked] = useAddBookedMutation();
   const useBooked: any = useAppSelector(useBookedCar);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -15,24 +20,11 @@ const BookingForm = () => {
   } = useForm<any>();
 
   const onSubmit: SubmitHandler<any> = async (data) => {
-    console.log("Form data:", data);
-    const carId = useBooked?._id;
-    const bookedInfo = {
-      payment: { ...data, status: "Panding" },
-      carId: carId,
-    };
-    const res = await addBooked(bookedInfo).unwrap();
-    console.log(res);
-    console.log(bookedInfo);
-    // Implement form submission logic here
-    // e.g., send data to an API endpoint
-  };
+    // console.log("Form data:", data);
+    navigate("/user/booking-confirmation");
 
-  //   {
-  //     "carId": "66dea312493f2b2ccacc4ac3",
-  //     "date": "2024-01-15",
-  //     "startTime": "17:00"
-  //  }
+    dispatch(confiremBooking({ ...data }));
+  };
 
   return (
     <div className="mt-10">
@@ -147,7 +139,7 @@ const BookingForm = () => {
           <div className="border-2 p-10 ">
             <div className="   my-5 space-y-8">
               <div>
-                <img src={useBooked.image} alt="" className="h-40" />
+                <img src={useBooked.image} alt="" className="" />
               </div>
 
               <div className="space-y-3">
@@ -182,7 +174,10 @@ const BookingForm = () => {
               </div>
             </div>
             <div className="w-full">
-              <Button className="w-full" htmlType="submit">
+              <Button
+                className="bg-primary-color w-full text-white text-center rounded-lg"
+                htmlType="submit"
+              >
                 Submit
               </Button>
             </div>

@@ -15,6 +15,9 @@ import { UserRoute } from "./User.Route";
 import { ProtectedRoute } from "./ProtactedRoute/ProtactedRoute";
 import UserUpdate from "../Component/Dashboard/User/UserManagement/UserUpdate";
 import BookingForm from "../Component/Dashboard/User/Booking/BookingFrom";
+import BookingConfirmation from "../Component/Dashboard/User/UserManagement/BookingConfirmation";
+import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy";
+import ContactPage from "../pages/Contact/Contact";
 
 export const route = createBrowserRouter([
   {
@@ -39,10 +42,26 @@ export const route = createBrowserRouter([
         element: <AboutUs />,
       },
       {
+        path: "privacy-policy",
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: "contact-us",
+        element: <ContactPage />,
+      },
+      {
         path: "booking",
         element: (
           <ProtectedRoute>
             <BookingForm />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "user/booking-confirmation",
+        element: (
+          <ProtectedRoute>
+            <BookingConfirmation />
           </ProtectedRoute>
         ),
       },
@@ -74,6 +93,7 @@ export const route = createBrowserRouter([
     ),
     children: routeGenarator(UserRoute),
   },
+
   {
     path: "/",
     element: (

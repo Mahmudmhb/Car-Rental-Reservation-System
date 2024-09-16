@@ -1,26 +1,27 @@
 import React from "react";
 import { motion } from "framer-motion"; // Import Framer Motion
 
-// Sample team data
 const teamMembers = [
   {
     name: "John Doe",
     role: "CEO",
-    photo: "https://via.placeholder.com/150", // Replace with actual image URL
+    photo:
+      "https://img.freepik.com/free-photo/business-man-using-his-mobile-phone_23-2148018588.jpg",
   },
   {
     name: "Jane Smith",
     role: "Chief Operating Officer",
-    photo: "https://via.placeholder.com/150", // Replace with actual image URL
+    photo:
+      "https://img.freepik.com/premium-photo/corporate-man_1164846-22755.jpg?",
   },
   {
     name: "Michael Johnson",
     role: "Head of Marketing",
-    photo: "https://via.placeholder.com/150", // Replace with actual image URL
+    photo:
+      "https://img.freepik.com/free-photo/successful-handsome-business-man-office_1303-20918.jpg",
   },
 ];
 
-// Sample fleet data
 const fleetInfo = [
   {
     category: "Economy",
@@ -39,7 +40,7 @@ const fleetInfo = [
   },
 ];
 
-const AboutUs: React.FC = () => {
+const AboutUs = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white">
       {/* Header */}

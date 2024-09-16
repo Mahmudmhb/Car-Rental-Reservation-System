@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../app/store";
 import { IBookingForm, TBooked } from "../../../Component/Types/Types";
@@ -15,6 +16,7 @@ interface BookingState {
   booked: TBooked[];
   returnCar: TBooked[];
   bookedCar: IBookingForm[];
+  confiremBooking: any;
 }
 
 const initialState: BookingState = {
@@ -22,6 +24,7 @@ const initialState: BookingState = {
   bookings: [],
   returnCar: [],
   bookedCar: [],
+  confiremBooking: [],
 };
 export const bookSlice = createSlice({
   name: "booked",
@@ -30,9 +33,6 @@ export const bookSlice = createSlice({
     gettAllbookedHsitory: (state, action) => {
       state.booked = action.payload;
     },
-    // getAllBooked: (state, action: PayloadAction<Booking[]>) => {
-    //   state.booked = action.payload;
-    // },
 
     FilterBooked: (state, action: PayloadAction<string>) => {
       const id = action.payload;
@@ -48,13 +48,24 @@ export const bookSlice = createSlice({
     bookedCar: (state, action: PayloadAction<IBookingForm[]>) => {
       state.bookedCar = action.payload;
     },
+    confiremBooking: (state, action) => {
+      console.log("confiremBooking", action.payload);
+      state.confiremBooking = action.payload;
+    },
   },
 });
-export const { gettAllbookedHsitory, bookedCar, FilterBooked, returnCar } =
-  bookSlice.actions;
+export const {
+  confiremBooking,
+  gettAllbookedHsitory,
+  bookedCar,
+  FilterBooked,
+  returnCar,
+} = bookSlice.actions;
 export const useBookhitory = (state: RootState) => state.booked.booked;
 export const useAllBooked = (state: RootState) => state.booked.booked;
 export const useReturnCar = (state: RootState) => state.booked.returnCar;
 export const useBookedCar = (state: RootState) => state.booked.bookedCar;
+export const useconfiremBooking = (state: RootState) =>
+  state.booked.confiremBooking;
 // export const useFilterBooked = (state: RootState)=> state.booked.booked
 export default bookSlice.reducer;

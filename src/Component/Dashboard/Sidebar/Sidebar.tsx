@@ -4,6 +4,7 @@ import { useCurrnetUser } from "../../../redux/features/auth/authSlice";
 import { SidebarGenarator } from "./SidebarGenarator";
 import { AdminRoute } from "../../../Route/Admin.Route";
 import { UserRoute } from "../../../Route/User.Route";
+
 const { Sider } = Layout;
 const userRole = {
   ADMIN: "admin",

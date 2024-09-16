@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from "../../redux/features/auth/authApi";
@@ -12,7 +11,7 @@ type FormData = {
   password: string;
 };
 
-const Login: React.FC = () => {
+const Login = () => {
   const [loginUser] = useLoginUserMutation();
   const dispatch = useAppDispatch();
 
@@ -23,24 +22,21 @@ const Login: React.FC = () => {
   } = useForm<FormData>({
     defaultValues: {
       email: "newadmin@example.com",
-      password: "newadmin", // Initial empty value
+      password: "newadmin",
     },
   });
   const navigate = useNavigate();
 
   const onSubmit = async (data: FormData) => {
     const toastId = toast.loading("logging in", { duration: 1000 });
-    // console.log(data);
     try {
       const res = await loginUser(data).unwrap();
       toast.success("logged in", { id: toastId, duration: 1000 });
       const userData = res?.data.user;
       const token = res?.data.token;
       dispatch(signUser({ userData, token }));
-      // console.log(res?.data.user);
 
       navigate("/");
-      // toast.error("Something went wrong");
     } catch (error) {
       toast.error("Something went wrong", { id: toastId, duration: 1000 });
     }
@@ -52,7 +48,6 @@ const Login: React.FC = () => {
         <h2 className="text-2xl font-bold text-center mb-6">Sign In</h2>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {/* Email Field */}
           <div>
             <label
               htmlFor="email"
@@ -81,7 +76,6 @@ const Login: React.FC = () => {
             )}
           </div>
 
-          {/* Password Field */}
           <div>
             <label
               htmlFor="password"
@@ -117,27 +111,20 @@ const Login: React.FC = () => {
             Sign In
           </button>
 
-          {/* Links */}
           <div className="flex justify-between text-sm">
-            <a
-              href="/forgot-password"
-              className="text-blue-500 hover:underline"
-            >
-              Forgot Password?
-            </a>
+            <p>Forgot Password?</p>
             <Link to="/signup" className="text-blue-500 hover:underline">
               Sign Up Instead
             </Link>
           </div>
         </form>
 
-        {/* Footer */}
         <div className="mt-6 text-center text-sm text-gray-500">
           <a href="/privacy-policy" className="hover:underline">
             Privacy Policy
           </a>{" "}
           &bull;{" "}
-          <a href="/terms-of-service" className="hover:underline">
+          <a href="/privacy-policy" className="hover:underline">
             Terms of Service
           </a>
         </div>

@@ -25,8 +25,9 @@ const UserUpdate = () => {
   const user = useAppSelector(useCurrnetUser) as unknown as TUser;
 
   const { address, email, name, phone, _id: userID } = user;
-
+  console.log("user id", userID);
   const onSubmit: SubmitHandler<TUser> = async (data) => {
+    console.log("data", data);
     const res = await userUpdateIntoDb({ userID, data }).unwrap();
     console.log("res", res.data);
     const userData = res.data;
@@ -42,7 +43,6 @@ const UserUpdate = () => {
     <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-md mt-6">
       <h2 className="text-2xl font-bold mb-4">Update Profile</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* Name */}
         <div className="mb-4">
           <label className="block text-sm font-medium mb-2" htmlFor="name">
             Name
@@ -57,7 +57,6 @@ const UserUpdate = () => {
           {errors.name && <p className="text-red-500">{errors.name.message}</p>}
         </div>
 
-        {/* Email */}
         <div className="mb-4">
           <label className="block text-sm font-medium mb-2" htmlFor="email">
             Email
@@ -71,7 +70,6 @@ const UserUpdate = () => {
           />
         </div>
 
-        {/* Phone */}
         <div className="mb-4">
           <label className="block text-sm font-medium mb-2" htmlFor="phone">
             Phone
@@ -85,7 +83,6 @@ const UserUpdate = () => {
           />
         </div>
 
-        {/* Address */}
         <div className="mb-4">
           <label className="block text-sm font-medium mb-2" htmlFor="address">
             Address
