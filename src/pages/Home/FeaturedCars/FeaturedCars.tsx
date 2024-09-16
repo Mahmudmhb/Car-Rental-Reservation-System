@@ -1,101 +1,41 @@
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-
-// import required modules
-import { Navigation, Pagination, Keyboard } from "swiper/modules";
-import Heading from "../../../Component/Heading/Heading";
-import { useGetAllCarQuery } from "../../../redux/features/Car/carApi";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Car from "../../Car Listing/car/Car";
+import { useAppSelector } from "../../../redux/app/hook";
+import { useCar } from "../../../redux/features/Car/CarSlice";
+
+import { Link } from "react-router-dom";
 const FeaturedCars = () => {
-  const { data, isLoading } = useGetAllCarQuery(undefined);
-
-  if (isLoading) {
-    return (
-      <div>
-        <p>Lodding.......</p>
-      </div>
-    );
-  }
-  const products = data?.data;
-
-  const letestProduct = [...products].sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  const useGetAllCar = useAppSelector(useCar);
+  const letestProduct = [...useGetAllCar]?.sort(
+    (a, b) =>
+      new Date(b.createdAt)?.getTime() - new Date(a.createdAt)?.getTime()
   );
-
   return (
-    <div className="w-11/12 mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <Heading
-        center="center"
-        Heading="Featured Cars"
-        Text=" Featured Cars presents a selection of luxury, sporty, and reliablevehicles, highlighting their features, performance and style for discerning drivers"
-      ></Heading>
+    <div className="bg-slate-50 ">
+      <div className="w-11/12 mx-auto px-4 sm:px-6 lg:px-8 py-12 rounded-xl">
+        <div className="text-center space-y-4 my-5">
+          <h3 className="text-[#234896]"> Car rent in bangladesh</h3>
+          <h1 className="text-[#050a15] text-5xl font-extrabold">
+            Types of<span className="text-[#234896]"> Featured</span> Cars
+          </h1>
+          <p>
+            At Car Rent BD, we offer a range of car rentals to cater to your
+            specific needs:
+          </p>
+        </div>
 
-      <div className="my-6">
-        <>
-          <Swiper
-            slidesPerView={4}
-            spaceBetween={30}
-            // mousewheel={true}
-            centeredSlides={true}
-            cssMode={true}
-            navigation={true}
-            pagination={{
-              clickable: true,
-            }}
-            breakpoints={{
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 3,
-                spaceBetween: 40,
-              },
-              1024: {
-                slidesPerView: 4,
-                spaceBetween: 50,
-              },
-            }}
-            keyboard={true}
-            modules={[Navigation, Pagination, Keyboard]}
-          >
-            {" "}
-            <div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                {letestProduct?.slice(0, 6).map((car) => (
-                  <SwiperSlide>
-                    {" "}
-                    <Car key={car._id} carItem={car} />
-                    {/* <div
-                      key={car.id}
-                      className="bg-white h-96  shadow-md rounded-lg overflow-hidden"
-                    >
-                      <img
-                        className="w-full h-48 object-cover"
-                        src={car.image}
-                        alt={car.name}
-                      />
-                      <div className="p-4">
-                        <h3 className="text-xl font-semibold text-gray-800">
-                          {car.name}
-                        </h3>
-                        <p className="text-gray-600">{car.price}</p>
-                        <button className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300">
-                          View Details
-                        </button>
-                      </div>
-                    </div> */}
-                  </SwiperSlide>
-                ))}
-              </div>
-            </div>
-          </Swiper>
-        </>
+        <div>
+          <div className="grid grid-cols-1 gap-10  justify-center my-10 md:grid-cols-3 lg:grid-cols-3 ">
+            {letestProduct?.slice(0, 6).map((car: any) => (
+              <Car key={car._id} carItem={car} />
+            ))}
+          </div>
+          <div className="bg-primary-color py-1  flex my-5 justify-center  md:w-[20%] mx-auto text-white rounded-lg">
+            <Link to={`/car-listing`}>
+              <button>More Details</button>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

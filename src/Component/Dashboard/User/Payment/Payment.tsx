@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { toast } from "sonner";
 import {
   useGetMyBookQuery,
   usePaymentOfCustomerMutation,
@@ -8,11 +9,14 @@ import { Button } from "antd";
 const Payment = () => {
   const { data } = useGetMyBookQuery(undefined);
   const booked = data?.data;
+  console.log(booked);
   const [orderPayment] = usePaymentOfCustomerMutation();
 
   const handlePayment = async (payment: string) => {
     const res = await orderPayment({ payment }).unwrap();
+    console.log(res);
     if (res.success === true) {
+      toast.success("your payment is loading", { duration: 1000 });
       window.location.href = res.data.payment_url;
     }
   };
@@ -37,42 +41,52 @@ const Payment = () => {
             {booked ? (
               booked?.map((item: any, idx: any) => (
                 <tr key={item._id}>
-                  <th>
-                    <h1>{idx + 1}</h1>
-                  </th>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle h-12 w-12">
-                          <img src={item?.carId?.image} alt="" />
+                  {item?.isBooked === "confirmed" && item?.totalCost > 0 && (
+                    <>
+                      <th>
+                        <h1>{idx + 1}</h1>
+                      </th>
+                      <td>
+                        <div className="flex items-center gap-3">
+                          <div className="avatar">
+                            <div className="mask mask-squircle h-12 w-12">
+                              <img src={item?.carId?.image} alt="" />
+                            </div>
+                          </div>
+                          <div>
+                            <div className="font-bold">
+                              {item?.carId?.name || "Unknown Car"}
+                            </div>
+                            <div className="text-sm opacity-50">
+                              {item?.description || "No Description"}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div>
-                        <div className="font-bold">
-                          {item?.carId?.name || "Unknown Car"}
-                        </div>
-                        <div className="text-sm opacity-50">
-                          {item?.description || "No Description"}
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>{item?.payment?.startTime}</td>
+                      </td>
+                      <td>{item?.payment?.startTime}</td>
 
-                  <td>{item?.endTime}</td>
-                  <td>${item?.totalCost}</td>
+                      <td>{item?.endTime}</td>
+                      <td>${item?.totalCost}</td>
 
-                  <td>
-                    {item?.isBooked === "confirmed" && (
-                      <>
-                        <p>
-                          <Button onClick={() => handlePayment(item)}>
-                            Proceed To Payment
-                          </Button>
-                        </p>
-                      </>
-                    )}
-                  </td>
+                      <td>
+                        {item?.paymentStatus === "Pending" ? (
+                          <>
+                            <p>
+                              <Button onClick={() => handlePayment(item)}>
+                                Proceed To Payment
+                              </Button>
+                            </p>
+                          </>
+                        ) : (
+                          <>
+                            <p className="bg-blue-700 text-white px-3 text-center py-1 rounded">
+                              Paid
+                            </p>
+                          </>
+                        )}
+                      </td>
+                    </>
+                  )}
                 </tr>
               ))
             ) : (

@@ -1,5 +1,6 @@
-import { FaFacebook, FaTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa"; // Importing social media icons from react-icons
+import { FaFacebook, FaTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { Button } from "antd";
+import { motion } from "framer-motion";
 
 // Sample testimonials data
 const testimonials = [
@@ -10,12 +11,12 @@ const testimonials = [
       "This service was amazing! The car was in great condition and the booking process was smooth and hassle-free.",
     rating: 5,
     image:
-      "https://img.freepik.com/free-photo/happy-business-man-wearing-grey-suit-standing-isolated-white-wall_231208-9211.jpg", // Replace with actual customer image URL
+      "https://img.freepik.com/free-photo/happy-business-man-wearing-grey-suit-standing-isolated-white-wall_231208-9211.jpg",
     socialMedia: {
       facebook: "https://facebook.com/johndoe",
       twitter: "https://twitter.com/johndoe",
       instagram: "https://instagram.com/johndoe",
-      whatsapp: "https://wa.me/1234567890", // Replace with actual WhatsApp number
+      whatsapp: "https://wa.me/1234567890",
     },
   },
   {
@@ -25,12 +26,12 @@ const testimonials = [
       "I had a fantastic experience. The customer service was excellent, and I would highly recommend this to others!",
     rating: 4,
     image:
-      "https://img.freepik.com/free-photo/businessman-smoking-isolated-white-background_1368-6441.jpg", // Replace with actual customer image URL
+      "https://img.freepik.com/free-photo/businessman-smoking-isolated-white-background_1368-6441.jpg",
     socialMedia: {
       facebook: "https://facebook.com/janesmith",
       twitter: "https://twitter.com/janesmith",
       instagram: "https://instagram.com/janesmith",
-      whatsapp: "https://wa.me/1234567890", // Replace with actual WhatsApp number
+      whatsapp: "https://wa.me/1234567890",
     },
   },
   {
@@ -40,12 +41,12 @@ const testimonials = [
       "Great variety of cars and very competitive pricing. I found the perfect car for my trip.",
     rating: 4,
     image:
-      "https://img.freepik.com/free-photo/happy-business-man-wearing-grey-suit-standing-isolated-white-wall_231208-9211.jpg", // Replace with actual customer image URL
+      "https://img.freepik.com/free-photo/happy-business-man-wearing-grey-suit-standing-isolated-white-wall_231208-9211.jpg",
     socialMedia: {
       facebook: "https://facebook.com/alexjohnson",
       twitter: "https://twitter.com/alexjohnson",
       instagram: "https://instagram.com/alexjohnson",
-      whatsapp: "https://wa.me/1234567890", // Replace with actual WhatsApp number
+      whatsapp: "https://wa.me/1234567890",
     },
   },
   {
@@ -55,12 +56,12 @@ const testimonials = [
       "This service was amazing! The car was in great condition and the booking process was smooth and hassle-free.",
     rating: 5,
     image:
-      "https://img.freepik.com/free-photo/happy-business-man-wearing-grey-suit-standing-isolated-white-wall_231208-9211.jpg", // Replace with actual customer image URL
+      "https://img.freepik.com/free-photo/happy-business-man-wearing-grey-suit-standing-isolated-white-wall_231208-9211.jpg",
     socialMedia: {
       facebook: "https://facebook.com/johndoe",
       twitter: "https://twitter.com/johndoe",
       instagram: "https://instagram.com/johndoe",
-      whatsapp: "https://wa.me/1234567890", // Replace with actual WhatsApp number
+      whatsapp: "https://wa.me/1234567890",
     },
   },
 ];
@@ -71,11 +72,13 @@ function CustomerTestimonials() {
       <div className=" w-11/12 grid md:grid-cols-2 gap-10  mx-auto px-4  my-10 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
           {testimonials.map((testimonial) => (
-            <div
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
               key={testimonial.id}
               className="bg-slate-100 rounded-2xl shadow-2xl  p-6 flex flex-col justify-between"
             >
-              <p className="text-gray-600  italic font-bold  mb-4">
+              <p className="text-gray-600  italic font-serif  mb-4">
                 {testimonial.feedback}
               </p>
               <div className="flex items-center mb-4">
@@ -139,7 +142,7 @@ function CustomerTestimonials() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
         <div className="flex justify-center items-center">

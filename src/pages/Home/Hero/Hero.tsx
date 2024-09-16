@@ -1,5 +1,6 @@
 import { useState } from "react";
 import car from "../../../assets/image/2025-audi-e-tron-gt-lineup-range.jpeg";
+import { Link } from "react-router-dom";
 const Hero = () => {
   const [location, setLocation] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -64,12 +65,14 @@ const Hero = () => {
                   </button>
                 </div>
                 <div className="w-full mt-5  flex justify-center items-center mb-6">
-                  <button
-                    className="bg-orange-500 text-white w-full py-2 px-6 rounded-lg text-lg hover:bg-orange-600 transition duration-300"
-                    onClick={handleBookNow}
-                  >
-                    Book Now
-                  </button>
+                  <Link to="/car-listing">
+                    <button
+                      className="bg-orange-500 text-white w-full py-2 px-6 rounded-lg text-lg hover:bg-orange-600 transition duration-300"
+                      onClick={handleBookNow}
+                    >
+                      Book Now
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

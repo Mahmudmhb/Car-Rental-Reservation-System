@@ -24,6 +24,7 @@ export const CarSlice = createSlice({
   reducers: {
     getAllCar: (state, action: PayloadAction<TCar[]>) => {
       const totalCar = action.payload;
+      console.log("total car", totalCar);
       const filterCar = totalCar?.filter(
         (item) => item.status !== "unavailable"
       );

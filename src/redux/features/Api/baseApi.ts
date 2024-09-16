@@ -34,23 +34,19 @@ const BaseQueryWithToken: BaseQueryFn<
       if (result.error.status === 401) {
         toast.error("Your session has expired. Please log in again.");
       } else if (result.error.status === 404) {
-        // Handle not found error
         toast.error("Resource not found.");
       } else {
-        // Handle other errors
         toast.error("An error occurred.");
       }
     }
 
     return result;
   } catch (error) {
-    // Handle network or unexpected errors
     toast.error("Network error or unexpected issue.");
     throw error;
   }
 };
 
-// Create the API service
 export const baseApi = createApi({
   reducerPath: "baseApi",
   tagTypes: ["users", "booking", "cars"],

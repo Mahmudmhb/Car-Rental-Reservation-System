@@ -42,7 +42,6 @@ export const route = createBrowserRouter([
         path: "booking",
         element: (
           <ProtectedRoute>
-            {" "}
             <BookingForm />
           </ProtectedRoute>
         ),

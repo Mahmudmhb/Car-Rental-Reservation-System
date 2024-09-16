@@ -3,7 +3,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useAppSelector } from "../../../../redux/app/hook";
 import { useBookedCar } from "../../../../redux/features/book/bookSlice";
 import { Button } from "antd";
-import FeaturedCars from "../../../../pages/Home/FeaturedCars/FeaturedCars";
 import { useAddBookedMutation } from "../../../../redux/features/book/bookApi";
 
 const BookingForm = () => {
@@ -36,7 +35,13 @@ const BookingForm = () => {
   //  }
 
   return (
-    <div>
+    <div className="mt-10">
+      <div className="text-center space-y-4 ">
+        <h3 className="text-[#234896]"> Car Rantal Rent in bangladesh</h3>
+        <h1 className="text-[#050a15] text-5xl font-extrabold">
+          Book Your <span className="text-[#234896]"> Car </span>
+        </h1>
+      </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="p-4 bg-white rounded shadow-md"
@@ -184,7 +189,6 @@ const BookingForm = () => {
           </div>
         </div>
       </form>
-      <FeaturedCars />
     </div>
   );
 };

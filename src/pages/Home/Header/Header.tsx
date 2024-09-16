@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 "use client";
 
 import { useState } from "react";
@@ -12,10 +13,9 @@ import { Button } from "antd";
 
 export const navigation = [
   { name: "Home", href: "/" },
-  { name: "About Us", href: "/about-us" },
-  { name: "Booking", href: "/booking" },
+  { name: "Car List", href: "/car-listing" },
   { name: "Contact", href: "#" },
-  { name: "Car Listing", href: "/car-listing" },
+  { name: "About Us", href: "/about-us" },
 ];
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

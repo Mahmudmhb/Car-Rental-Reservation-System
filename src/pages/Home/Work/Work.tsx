@@ -2,13 +2,10 @@ import bg from "../../../assets/image/a06e86e4-border_frame.png";
 
 const Work = () => {
   return (
-    <div className="w-11/12 mx-auto mt-20 space-y-10">
-      <div className="text-center  space-y-5 ">
-        <h1 className="text-3xl font-bold ">How It Works</h1>
-        <p className="font-thin text-xl">
-          Make it happens in 4 easy steps! Best Of Luck
-        </p>
-      </div>
+    <div
+      className="
+     "
+    >
       <div className="grid md:grid-cols-2 gap-10">
         <div
           style={{ backgroundImage: `url(${bg})` }}

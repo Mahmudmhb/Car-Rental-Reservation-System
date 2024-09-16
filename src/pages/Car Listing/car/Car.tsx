@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { TCar } from "../../../Component/Types/Types";
+import { motion } from "framer-motion";
 
 type TCarItem = {
   carItem: TCar;
@@ -7,8 +8,12 @@ type TCarItem = {
 
 const Car = ({ carItem }: TCarItem) => {
   return (
-    <div>
-      <div className="card bg-base-100 h-96 w-[300px] shadow-xl">
+    <motion.div
+      className="my-3"
+      whileHover={{ scale: 1.05 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="card bg-base-100 h-96 w-96 shadow-xl">
         <figure>
           <img src={carItem?.image} alt="" />
         </figure>
@@ -30,7 +35,7 @@ const Car = ({ carItem }: TCarItem) => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

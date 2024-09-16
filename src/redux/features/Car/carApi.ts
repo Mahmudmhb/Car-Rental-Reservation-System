@@ -54,7 +54,7 @@ const carApi = baseApi.injectEndpoints({
           body: data,
         };
       },
-      invalidatesTags: ["cars"],
+      invalidatesTags: ["booking"],
     }),
   }),
 });

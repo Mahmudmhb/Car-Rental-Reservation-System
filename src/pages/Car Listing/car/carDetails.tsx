@@ -22,7 +22,6 @@ const CarDetails = () => {
     );
   }
   const car: TCar = data?.data;
-  console.log(carId, car);
   const additionalFeatures = ["Insurance", "GPS", "Child Seat"];
 
   const AddFeatures = (data: any) => {

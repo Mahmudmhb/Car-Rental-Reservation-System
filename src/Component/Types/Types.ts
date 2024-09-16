@@ -15,6 +15,7 @@ export type TUser = {
   isBlocked?: true;
 };
 export type TCar = {
+  createdAt: string | number | Date;
   _id?: string;
   name: string;
   description: string;

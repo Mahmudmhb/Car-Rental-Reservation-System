@@ -36,19 +36,16 @@ export const bookSlice = createSlice({
 
     FilterBooked: (state, action: PayloadAction<string>) => {
       const id = action.payload;
-      console.log("booking id", id);
       state.booked = state?.booked?.filter((item) => item._id !== id);
       console.log(state.booked);
     },
     returnCar: (state, action: PayloadAction<TBooked[]>) => {
-      console.log(action.payload);
       const totalBookedCar = action.payload;
       state.returnCar = totalBookedCar.filter(
         (item) => item.isBooked === "confirmed" && item.totalCost == 0
       );
     },
     bookedCar: (state, action: PayloadAction<IBookingForm[]>) => {
-      console.log(action.payload);
       state.bookedCar = action.payload;
     },
   },

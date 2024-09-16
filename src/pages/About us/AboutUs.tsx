@@ -126,7 +126,6 @@ const AboutUs: React.FC = () => {
         </div>
       </motion.section>
 
-      {/* Values & Commitment */}
       <motion.section
         className="mb-12"
         initial={{ opacity: 0, y: 50 }}
