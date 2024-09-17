@@ -147,15 +147,22 @@ function CustomerTestimonials() {
         </div>
         <div className="flex justify-center items-center">
           <div className="space-y-10">
-            <h1 className="text-5xl font-extrabold">
-              Thousands of satisfied customers
-            </h1>
-            <p className="text-3xl">
+            <div className=" space-y-4 my-5">
+              <h1 className="text-[#050a15] text-5xl font-extrabold">
+                <span className="text-[#234896]"> Thousands</span> of satisfied
+                customers
+              </h1>
+              <p>
+                At Car Rent BD, we offer a range of car rentals to cater to your
+                specific needs:
+              </p>
+            </div>
+            <p className="text-xl">
               Over the last 20 years we’ve had more reviews than we can count.
               We’ve included as many as we can here so you can see what others
               have to say about their GO experiences.
             </p>
-            <Button>See More Reviews</Button>
+            <Button className="bg-primary text-white">See More Reviews</Button>
           </div>
         </div>
       </div>

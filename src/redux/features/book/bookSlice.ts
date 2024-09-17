@@ -17,6 +17,7 @@ interface BookingState {
   returnCar: TBooked[];
   bookedCar: IBookingForm[];
   confiremBooking: any;
+  paymentInfo: any;
 }
 
 const initialState: BookingState = {
@@ -25,6 +26,7 @@ const initialState: BookingState = {
   returnCar: [],
   bookedCar: [],
   confiremBooking: [],
+  paymentInfo: [],
 };
 export const bookSlice = createSlice({
   name: "booked",
@@ -52,6 +54,9 @@ export const bookSlice = createSlice({
       console.log("confiremBooking", action.payload);
       state.confiremBooking = action.payload;
     },
+    paymentInformation: (state, action) => {
+      state.paymentInfo = action.payload;
+    },
   },
 });
 export const {
@@ -59,6 +64,7 @@ export const {
   gettAllbookedHsitory,
   bookedCar,
   FilterBooked,
+  paymentInformation,
   returnCar,
 } = bookSlice.actions;
 export const useBookhitory = (state: RootState) => state.booked.booked;
@@ -67,5 +73,5 @@ export const useReturnCar = (state: RootState) => state.booked.returnCar;
 export const useBookedCar = (state: RootState) => state.booked.bookedCar;
 export const useconfiremBooking = (state: RootState) =>
   state.booked.confiremBooking;
-// export const useFilterBooked = (state: RootState)=> state.booked.booked
+export const usepaymentInfo = (state: RootState) => state.booked.paymentInfo;
 export default bookSlice.reducer;

@@ -18,6 +18,7 @@ import BookingForm from "../Component/Dashboard/User/Booking/BookingFrom";
 import BookingConfirmation from "../Component/Dashboard/User/UserManagement/BookingConfirmation";
 import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy";
 import ContactPage from "../pages/Contact/Contact";
+import PaymentConfirmation from "../Component/Dashboard/User/Payment/PaymentConfirmation/PaymentConfirmation";
 
 export const route = createBrowserRouter([
   {
@@ -92,6 +93,20 @@ export const route = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: routeGenarator(UserRoute),
+  },
+  {
+    path: "/user",
+    element: (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: "payment-confirmation",
+        element: <PaymentConfirmation />,
+      },
+    ],
   },
 
   {

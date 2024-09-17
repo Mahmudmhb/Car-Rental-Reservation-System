@@ -1,41 +1,52 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useState } from "react";
 import {
   useDeleteCarMutation,
   useGetAllCarQuery,
 } from "../../../redux/features/Car/carApi";
 import { CgSpinner } from "react-icons/cg";
 import { TCar } from "../../Types/Types";
-import { BiTrash } from "react-icons/bi";
-// import { useAppDispatch } from "../../../redux/app/hook";
+import { BiEdit, BiTrash } from "react-icons/bi";
 import AddNewCar from "./AddNewCar/AddNewCar";
-import { useAppDispatch } from "../../../redux/app/hook";
-import { carUpdate } from "../../../redux/features/Car/CarSlice";
+
 import UpdateCar from "./UpdateCar/UpdateCar";
 import { toast } from "sonner";
 
 const ManageCars = () => {
   const { data, isLoading } = useGetAllCarQuery(undefined);
   const [deletedCar] = useDeleteCarMutation();
-  const dispatch = useAppDispatch();
+  const [selectedCar, setSelectedCar] = useState<TCar | null>(null);
 
-  // const dispatch = useAppDispatch();
   if (isLoading) {
     return (
-      <>
-        <CgSpinner />
-      </>
+      <div className="flex justify-center items-center h-64">
+        <CgSpinner className="text-4xl" />
+      </div>
     );
   }
+
   const totalCars = data?.data;
 
   const handleDelete = async (carId: string) => {
-    const res = await deletedCar({ carId }).unwrap();
-    if (res.data.deletedCount > 0) {
-      toast.success(res.message);
+    try {
+      const res = await deletedCar({ carId }).unwrap();
+      if (res.data.deletedCount > 0) {
+        toast.success(res.message);
+      }
+    } catch (error) {
+      toast.error("Failed to delete car.");
     }
   };
+
   const handleUpdate = (carInfo: TCar) => {
-    dispatch(carUpdate(carInfo));
+    setSelectedCar(carInfo);
+    // Open the modal here
   };
+
+  const closeUpdateModal = () => {
+    setSelectedCar(null);
+  };
+
   return (
     <div className="my-5">
       <div>
@@ -50,9 +61,8 @@ const ManageCars = () => {
             <tr>
               <th>Sl</th>
               <th>Car Name</th>
-              <th>Featurs</th>
-              <th>price Per Hour</th>
-
+              <th>Features</th>
+              <th>Price Per Hour</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -81,16 +91,15 @@ const ManageCars = () => {
                       </div>
                     </div>
                   </td>
-                  <td>{item.features}</td>
+                  <td>{item.features.join(", ")}</td>
                   <td>{item.pricePerHour}</td>
-
                   <td>{item.status}</td>
                   <td>
                     <div className="flex gap-3 items-center text-2xl">
                       <button onClick={() => handleUpdate(item)}>
-                        <UpdateCar />
+                        <BiEdit className="text-blue-500" />
                       </button>
-                      <button onClick={() => handleDelete(item._id)}>
+                      <button onClick={() => handleDelete(item._id as string)}>
                         <BiTrash className="text-yellow-400 font-bold" />
                       </button>
                     </div>
@@ -99,14 +108,19 @@ const ManageCars = () => {
               ))
             ) : (
               <tr>
-                <td colSpan={8} className="text-center">
-                  No bookings found.
+                <td colSpan={6} className="text-center">
+                  No cars found.
                 </td>
               </tr>
             )}
           </tbody>
         </table>
       </div>
+
+      {/* Render UpdateCar component conditionally */}
+      {selectedCar && (
+        <UpdateCar car={selectedCar} onClose={closeUpdateModal} />
+      )}
     </div>
   );
 };

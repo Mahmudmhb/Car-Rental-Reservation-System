@@ -59,7 +59,7 @@ export interface Filters {
 
 export interface CarState {
   car: TCar[];
-  updateCar: TCar[];
+  updateCar: TCar[] | undefined;
   filteredCars: TCar[];
   filters: Filters;
 }

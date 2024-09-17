@@ -96,26 +96,6 @@ const UserUpdate = () => {
           />
         </div>
 
-        {/* Terms Accepted */}
-        <div className="mb-4">
-          <label className="inline-flex items-center">
-            <input
-              {...register("termsAccepted", {
-                required: "You must accept the terms and conditions",
-              })}
-              type="checkbox"
-              className="form-checkbox text-blue-500"
-            />
-            <span className="ml-2 text-sm">
-              I accept the terms and conditions
-            </span>
-          </label>
-          {errors.termsAccepted && (
-            <p className="text-red-500">{errors.termsAccepted.message}</p>
-          )}
-        </div>
-
-        {/* Submit Button */}
         <button
           type="submit"
           className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"

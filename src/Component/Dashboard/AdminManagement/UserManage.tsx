@@ -14,23 +14,33 @@ const UserManagement = () => {
     return <div className="text-center my-10">Loading...</div>;
   }
 
-  const handleBlockUser = (userId: string) => {
+  const handleBlockUser = async (userID: string) => {
     // dispatch(blockUser(userId));
-    console.log("user", userId);
+    console.log("user", userID);
+    const data = {
+      status: "Block",
+    };
+    const res = await updateUserRole({ userID, data }).unwrap();
+    console.log(res);
+    toast.success(res.message);
   };
 
-  const handleActivateUser = (userId: string) => {
+  const handleActivateUser = async (userID: string) => {
+    const data = {
+      status: "Active",
+    };
     // dispatch(activateUser(userId));
-    console.log("user", userId);
+    const res = await updateUserRole({ userID, data }).unwrap();
+    toast.success(res.message);
+    console.log("user", userID);
   };
 
-  const handleChangeRole = async (userId: string, role: "admin" | "user") => {
-    // dispatch(changeUserRole({ userId, newRole }));
+  const handleChangeRole = async (userID: string, role: "admin" | "user") => {
     const data = {
       role: role,
     };
     if (role) {
-      const res = await updateUserRole({ userId, data }).unwrap();
+      const res = await updateUserRole({ userID, data }).unwrap();
       toast.success(res.message);
     } else {
       console.log("error to load data");
@@ -75,7 +85,7 @@ const UserManagement = () => {
               </td>
               <td>
                 <div className="flex gap-2">
-                  {user.isBlocked ? (
+                  {user?.status === "Block" ? (
                     <button
                       className="btn btn-success btn-sm"
                       onClick={() => handleActivateUser(user._id)}

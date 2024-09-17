@@ -46,7 +46,7 @@ const ContactPage = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
-        <div className="flex justify-evenly  items-center">
+        <div className="md:flex justify-evenly  items-center">
           <div className="mb-6 h-56 w-56 rounded-3xl  flex justify-center items-center bg-yellow-400 text-center">
             <div>
               <h3 className="text-2xl font-semibold mb-2 text-gray-800">

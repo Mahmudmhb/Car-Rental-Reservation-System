@@ -42,7 +42,7 @@ const ManageBookings = () => {
             <tr>
               <th>Sl</th>
               <th>Car Name</th>
-              <th>Booking Date</th>
+
               <th>Start Time</th>
               <th>End Time</th>
               <th>Total Cost</th>
@@ -73,8 +73,9 @@ const ManageBookings = () => {
                       </div>
                     </div>
                   </td>
-                  <td>{item.date}</td>
-                  <td>{item.startTime}</td>
+
+                  <td>{item.payment?.startTime}</td>
+
                   <td>{item.endTime}</td>
                   <td>${item.totalCost}</td>
 

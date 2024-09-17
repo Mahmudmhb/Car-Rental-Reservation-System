@@ -29,10 +29,10 @@ const Booking = () => {
             <tr>
               <th>Sl</th>
               <th>Car Name</th>
-              <th>Booking Date</th>
               <th>Start Time</th>
               <th>End Time</th>
               <th>Total Cost</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>

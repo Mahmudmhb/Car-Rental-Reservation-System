@@ -1,24 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { toast } from "sonner";
-import {
-  useGetMyBookQuery,
-  usePaymentOfCustomerMutation,
-} from "../../../../redux/features/book/bookApi";
+import { useGetMyBookQuery } from "../../../../redux/features/book/bookApi";
 import { Button } from "antd";
+import { useAppDispatch } from "../../../../redux/app/hook";
+
+import { paymentInformation } from "../../../../redux/features/book/bookSlice";
+import { useNavigate } from "react-router-dom";
 
 const Payment = () => {
   const { data } = useGetMyBookQuery(undefined);
+  const dispatch = useAppDispatch();
+  const navidate = useNavigate();
   const booked = data?.data;
   console.log(booked);
-  const [orderPayment] = usePaymentOfCustomerMutation();
 
   const handlePayment = async (payment: string) => {
-    const res = await orderPayment({ payment }).unwrap();
-    console.log(res);
-    if (res.success === true) {
-      toast.success("your payment is loading", { duration: 1000 });
-      window.location.href = res.data.payment_url;
-    }
+    dispatch(paymentInformation(payment));
+    navidate("/user/payment-confirmation");
   };
 
   return (
