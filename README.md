@@ -48,8 +48,8 @@ Make sure you have the following installed:
    ```bash
    git clone https://github.com/Mahmudmhb/Car-Rental-Reservation-System
    cd car-booking-system
-   Install dependencies:
    ```
+   Install dependencies:
 
 ```bash
 npm install
@@ -92,13 +92,12 @@ npm run lint
 ```
 
 Technologies Used
-Vite: Fast build tool for modern web projects.
-React: JavaScript library for building user interfaces.
-TypeScript: Type-safe JavaScript.
-Redux Toolkit: State management for React.
-React Router: Declarative routing for React apps.
-Tailwind CSS: Utility-first CSS framework.
-DaisyUI: Tailwind CSS components.
-Framer Motion: Library for animations.
-Ant Design: UI components library for React.
-ESLint: Linting tool for code quality and consistency.
+The project uses the following key dependencies:
+
+- React - JavaScript library for building user interfaces
+- Vite - Build tool for fast development
+- Redux Toolkit - For state management
+- Tailwind CSS - CSS framework
+- React Router - Client-side routing
+- Framer Motion - Animations
+- DaisyUI - Tailwind CSS components
