@@ -1,72 +1,104 @@
-This is **https://rental-car-reservation.netlify.app/**, a project built with React, Vite, TypeScript, Tailwind CSS, and Redux Toolkit. The project includes several UI components, animations, form handling, and routing.
+# [Car Booking System](https://rental-car-reservation.netlify.app/)
+
+This is a **Car Booking System** web application built using **React**, **Vite**, **TypeScript**, **Redux**, and **Tailwind CSS**. The system includes features like user authentication, car listing, car booking, admin and user dashboards, and more.
 
 ## Features
 
-- **React 18**: A powerful front-end JavaScript library for building user interfaces.
-- **Vite**: A fast build tool optimized for modern web development.
-- **TypeScript**: For static typing and improved development experience.
-- **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
-- **DaisyUI**: Provides components and themes based on Tailwind CSS.
-- **Redux Toolkit**: For state management.
-- **React Hook Form**: Efficient handling of forms in React.
-- **Ant Design**: Rich set of high-quality React components.
-- **Animations**: Included using **Framer Motion** and **Animate.css**.
-- **React Icons**: Provides popular icons as React components.
-- **React Router**: For client-side routing.
-- **Persisted Redux**: Keep your Redux state persistent using `redux-persist`.
-- **ESLint**: Ensure code quality and consistency.
+- **Car Listing & Details**: Users can browse through available cars and view detailed information.
+- **User Authentication**: Includes login and signup pages.
+- **Booking System**: Users can book cars and manage their bookings through a dashboard.
+- **Admin Panel**: Admins can manage users, car listings, and bookings.
+- **Protected Routes**: Certain routes (like booking, admin) are protected and can only be accessed by logged-in users.
+- **Responsive Design**: Built using Tailwind CSS to provide a responsive UI.
+
+## Routes
+
+The application follows a modular route structure using `react-router-dom` and includes:
+
+- `/`: Home Page
+- `/car-listing`: Lists all available cars for booking.
+- `/car-details/:carId`: View detailed information about a specific car.
+- `/about-us`: Company information.
+- `/privacy-policy`: View the privacy policy.
+- `/contact-us`: Contact page.
+- `/login`: Login page.
+- `/signup`: User registration page.
+- `/booking`: Booking form (Protected route).
+- `/user/booking-confirmation`: Booking confirmation (Protected route).
+- `/admin`: Admin dashboard (Protected route).
+- `/user/dashboard/user-update`: User profile update (Protected route).
+
+### Admin and User Routes
+
+- Admin and user routes are generated dynamically using `routeGenarator`.
+- Protected routes are managed with the `ProtectedRoute` component to ensure only logged-in users can access specific pages.
 
 ## Installation
 
+### Prerequisites
+
+Make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (v14 or higher)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+
+### Setup
+
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/assignment-5.git
-   cd assignment-5
+   git clone https://github.com/Mahmudmhb/Car-Rental-Reservation-System
+   cd car-booking-system
    Install dependencies:
-   bash
-   Copy code
-   npm install
-   Usage
-   Development
-   To start the development server:
    ```
 
-bash
-Copy code
+```bash
+npm install
+# or, if you are using yarn
+yarn install
+```
+
+Create an .env file in the root directory and add the required environment variables:
+
+```bash
+VITE_API_BASE_URL=your-api-base-url
+VITE_OTHER_ENV_VARIABLE=your-other-env-value
+```
+
+Scripts
+Here are the available scripts you can run:
+
+Development: Start the development server:
+
+```bash
 npm run dev
-Build
-To create a production build:
+```
 
-bash
-Copy code
+Build: Build the project for production:
+
+```bash
 npm run build
-Preview
-To preview the production build:
+```
 
-bash
-Copy code
+Preview: Preview the production build locally:
+
+```bash
 npm run preview
-Lint
-To lint the code:
+```
 
-bash
-Copy code
+Lint: Run ESLint to check for linting issues:
+
+```bash
 npm run lint
-Dependencies
-The project uses the following main libraries and tools:
+```
 
-React
-Vite
-Redux Toolkit
-Tailwind CSS
-Ant Design
-React Hook Form
-Framer Motion
-SweetAlert2
-License
-This project is licensed under the MIT License.
-
-css
-Copy code
-
-Feel free to adjust the sections according to your specific project details!
+Technologies Used
+Vite: Fast build tool for modern web projects.
+React: JavaScript library for building user interfaces.
+TypeScript: Type-safe JavaScript.
+Redux Toolkit: State management for React.
+React Router: Declarative routing for React apps.
+Tailwind CSS: Utility-first CSS framework.
+DaisyUI: Tailwind CSS components.
+Framer Motion: Library for animations.
+Ant Design: UI components library for React.
+ESLint: Linting tool for code quality and consistency.
