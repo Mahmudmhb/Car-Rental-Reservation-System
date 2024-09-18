@@ -1,50 +1,72 @@
-# React + TypeScript + Vite
+This is **https://rental-car-reservation.netlify.app/**, a project built with React, Vite, TypeScript, Tailwind CSS, and Redux Toolkit. The project includes several UI components, animations, form handling, and routing.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Features
 
-Currently, two official plugins are available:
+- **React 18**: A powerful front-end JavaScript library for building user interfaces.
+- **Vite**: A fast build tool optimized for modern web development.
+- **TypeScript**: For static typing and improved development experience.
+- **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
+- **DaisyUI**: Provides components and themes based on Tailwind CSS.
+- **Redux Toolkit**: For state management.
+- **React Hook Form**: Efficient handling of forms in React.
+- **Ant Design**: Rich set of high-quality React components.
+- **Animations**: Included using **Framer Motion** and **Animate.css**.
+- **React Icons**: Provides popular icons as React components.
+- **React Router**: For client-side routing.
+- **Persisted Redux**: Keep your Redux state persistent using `redux-persist`.
+- **ESLint**: Ensure code quality and consistency.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
 
-## Expanding the ESLint configuration
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/assignment-5.git
+   cd assignment-5
+   Install dependencies:
+   bash
+   Copy code
+   npm install
+   Usage
+   Development
+   To start the development server:
+   ```
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+bash
+Copy code
+npm run dev
+Build
+To create a production build:
 
-- Configure the top-level `parserOptions` property like this:
+bash
+Copy code
+npm run build
+Preview
+To preview the production build:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+bash
+Copy code
+npm run preview
+Lint
+To lint the code:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+bash
+Copy code
+npm run lint
+Dependencies
+The project uses the following main libraries and tools:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+React
+Vite
+Redux Toolkit
+Tailwind CSS
+Ant Design
+React Hook Form
+Framer Motion
+SweetAlert2
+License
+This project is licensed under the MIT License.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+css
+Copy code
+
+Feel free to adjust the sections according to your specific project details!

@@ -20,7 +20,7 @@ const Info = () => {
           </h1>
           <p>Make it happen in 4 easy steps! Best Of Luck</p>
         </motion.div>
-        <div className="grid md:grid-cols-2 gap-8 md:min-h-[90vh] my-10">
+        <div className="md:grid md:grid-cols-2 gap-8 md:min-h-[90vh] my-10">
           <div>
             <motion.div
               className="hero h-full md:min-h-[80vh] rounded-2xl bg-cover bg-center"
@@ -51,12 +51,12 @@ const Info = () => {
           </div>
           <div>
             <motion.div
-              className="border-l-2 md:h-[420px] border-dashed md:relative ml-10"
+              className="md:border-l-2 mt-5 md:h-[420px] border-dashed md:relative ml-10"
               initial={{ x: -50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 1 }}
             >
-              <div className="space-y-10 -left-8 top-0 md:absolute">
+              <div className="space-y-10 md:-left-8 top-0 md:absolute">
                 {[
                   {
                     icon: FaPencilRuler,
@@ -89,13 +89,13 @@ const Info = () => {
                 ].map(({ icon: Icon, title, description, number }) => (
                   <motion.div
                     key={number}
-                    className="flex gap-5"
+                    className="md:flex   gap-5"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5 }}
                   >
                     <div className="flex">
-                      <Icon className="text-7xl bg-[#234896] text-white p-5 rounded-full" />
+                      <Icon className="text-7xl  bg-[#234896] text-white p-5 rounded-full" />
                       <div className="badge badge-warning -ml-5">{number}.</div>
                     </div>
                     <div className="space-y-5">

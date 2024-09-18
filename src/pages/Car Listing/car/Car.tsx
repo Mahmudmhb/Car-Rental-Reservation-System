@@ -13,7 +13,7 @@ const Car = ({ carItem }: TCarItem) => {
       whileHover={{ scale: 1.05 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="card bg-base-100 h-96 w-96 shadow-xl">
+      <div className="card bg-base-100 md:h-96 md:w-96 shadow-xl">
         <figure>
           <img src={carItem?.image} alt="" />
         </figure>

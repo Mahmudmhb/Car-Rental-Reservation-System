@@ -3,6 +3,7 @@ export type TFilter = {
   carType: string;
 };
 export type TUser = {
+  status: string;
   name: string;
   _id: string;
   email: string;

@@ -1,5 +1,4 @@
 /* eslint-disable react-refresh/only-export-components */
-"use client";
 
 import { useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
@@ -17,7 +16,7 @@ export const navigation = [
   { name: "Contact", href: "/contact-us" },
   { name: "About Us", href: "/about-us" },
 ];
-export default function Header() {
+const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const user = useAppSelector(useCurrnetUser);
 
@@ -141,4 +140,5 @@ export default function Header() {
       </header>
     </div>
   );
-}
+};
+export default Header;

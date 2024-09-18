@@ -11,7 +11,7 @@ import { RootState } from "../../app/store";
 import { toast } from "sonner";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5000/api/",
+  baseUrl: "https://assignment-3-ten-eta.vercel.app/api/",
 
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;

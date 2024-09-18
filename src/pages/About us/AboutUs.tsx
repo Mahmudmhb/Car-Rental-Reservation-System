@@ -1,5 +1,4 @@
-import React from "react";
-import { motion } from "framer-motion"; // Import Framer Motion
+import { motion } from "framer-motion";
 
 const teamMembers = [
   {
@@ -43,7 +42,6 @@ const fleetInfo = [
 const AboutUs = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white">
-      {/* Header */}
       <motion.header
         className="mb-12 text-center"
         initial={{ opacity: 0, y: -50 }}
@@ -57,7 +55,6 @@ const AboutUs = () => {
         </p>
       </motion.header>
 
-      {/* Company History */}
       <motion.section
         className="mb-12"
         initial={{ opacity: 0, x: -50 }}
@@ -76,7 +73,6 @@ const AboutUs = () => {
         </p>
       </motion.section>
 
-      {/* Our Team */}
       <motion.section
         className="mb-12"
         initial={{ opacity: 0, x: 50 }}
@@ -104,7 +100,6 @@ const AboutUs = () => {
         </div>
       </motion.section>
 
-      {/* Our Fleet */}
       <motion.section
         className="mb-12"
         initial={{ opacity: 0, y: 50 }}
@@ -142,7 +137,6 @@ const AboutUs = () => {
         </p>
       </motion.section>
 
-      {/* Contact Information */}
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
