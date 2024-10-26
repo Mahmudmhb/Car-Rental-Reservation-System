@@ -8,6 +8,7 @@ import Hero from "./Hero/Hero";
 import Info from "./Info/Info";
 import LabelInfo from "./LabelInfo/LabelInfo";
 import CustomerTestimonials from "./Testimonials/Testimonials";
+import TrendingCars from "./TrendingCars/TrendingCars";
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -22,6 +23,7 @@ const Home = () => {
     <div className="bg-white dark:bg-gray-900 text-black dark:text-white">
       <Hero />
       <Info />
+      <TrendingCars />
       <FeaturedCars />
       <ChooseUs />
       <LabelInfo />

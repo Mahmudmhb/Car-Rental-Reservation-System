@@ -6,9 +6,11 @@ import {
   useAllBooked,
 } from "../../../redux/features/book/bookSlice";
 import { useCar } from "../../../redux/features/Car/CarSlice";
+import { useCurrnetUser } from "../../../redux/features/auth/authSlice";
 
 const AdminDashboard = () => {
   const dispatch = useAppDispatch();
+  const user = useAppSelector(useCurrnetUser);
   const totalBooked = useAppSelector(useAllBooked);
   const availableCars = useAppSelector(useCar);
   const { data, isLoading } = useGetAllBookedQuery(undefined);
@@ -33,12 +35,15 @@ const AdminDashboard = () => {
 
   return (
     <div>
-      <div className="p-6 bg-gray-50 min-h-screen">
-        {" "}
-        {/* Light gray background for the whole dashboard */}
-        <h1 className="text-3xl font-bold mb-6 text-gray-800">
-          Dashboard Overview
-        </h1>
+      <div className="p-6  bg-gray-50 min-h-screen">
+        <div className="mb-5">
+          <h1 className="text-2xl font-bold text-gray-800">
+            Good Morning, <span className="text-[#234896]">{user?.name}</span>
+          </h1>
+          <span className="mb-6 ">
+            Here's what's happening with your store today.
+          </span>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-green-200 shadow-md h-44 flex flex-col justify-center items-center rounded-lg p-4">
             {" "}

@@ -25,7 +25,7 @@ const BookingForm = () => {
 
     dispatch(confiremBooking({ ...data }));
   };
-
+  console.log(useBooked);
   return (
     <div className="mt-10">
       <div className="text-center space-y-4 ">

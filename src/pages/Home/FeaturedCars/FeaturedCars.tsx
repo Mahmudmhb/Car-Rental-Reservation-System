@@ -32,7 +32,7 @@ const FeaturedCars = () => {
           </div>
           <div className="bg-primary-color py-1  flex my-5 justify-center  md:w-[20%] mx-auto text-white rounded-lg">
             <Link to={`/car-listing`}>
-              <button>More Details</button>
+              <button>More Cars</button>
             </Link>
           </div>
         </div>

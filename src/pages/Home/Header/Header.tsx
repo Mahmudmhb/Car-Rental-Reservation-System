@@ -21,11 +21,11 @@ const Header = () => {
   const user = useAppSelector(useCurrnetUser);
 
   return (
-    <div className="bg-white">
-      <header className=" inset-x-0 w-11/12 mx-auto border-b top-0 z-50">
+    <div className="bg-white sticky top-0 z-10 shadow-2xl">
+      <header className=" inset-x-0 w-11/12  mx-auto border-b top-0 z-50">
         <nav
           aria-label="Global"
-          className="flex items-center justify-between   lg:px-8"
+          className="flex items-center font-extrabold uppercase  justify-between   lg:px-8"
         >
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
@@ -59,7 +59,7 @@ const Header = () => {
             {user ? (
               <>
                 <Link to={`${user?.role}/dashboard`}>
-                  <Button className="text-sm bg-primary-color font-semibold leading-6 text-white px-3 py-1 rounded-lg">
+                  <Button className="text-sm  font-semibold leading-6 uppercase  px-3 py-1 rounded-lg">
                     Dashboard
                   </Button>
                 </Link>
@@ -69,7 +69,7 @@ const Header = () => {
                 <Link to="/login">
                   {" "}
                   <button className="text-sm bg-primary-color font-semibold leading-6 text-white px-3 py-1 rounded-lg">
-                    Log in <span aria-hidden="true">&rarr;</span>
+                    Log in <span aria-hidden="true"> &rarr;</span>
                   </button>
                 </Link>
               </>

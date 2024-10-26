@@ -91,6 +91,7 @@ const CarDetails = () => {
               <label key={feature} className="inline-flex items-center">
                 <input
                   type="checkbox"
+                  required
                   value={feature}
                   onChange={() => AddFeatures(feature)}
                   className="form-checkbox text-blue-600"

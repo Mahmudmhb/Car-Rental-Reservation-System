@@ -1,9 +1,3 @@
-// import React from "react";
-// import {
-//   UploadOutlined,
-//   UserOutlined,
-//   VideoCameraOutlined,
-// } from "@ant-design/icons";
 import { Button, Layout, theme } from "antd";
 import { Link, Outlet } from "react-router-dom";
 import { useAppDispatch } from "../../redux/app/hook";
@@ -27,7 +21,7 @@ const Dashboard = () => {
     <Layout>
       <Sidebar />
       <Layout>
-        <Header>
+        <Header className="flex items-center">
           <div className="hidden lg:flex items-center lg:gap-x-12">
             <div className=" ">
               {navigation.map((item) => (
@@ -40,8 +34,8 @@ const Dashboard = () => {
                 </Link>
               ))}
             </div>
-            <Button onClick={handleLogout}>Logout</Button>{" "}
           </div>
+          <Button onClick={handleLogout}>Logout</Button>{" "}
         </Header>
         <Content style={{ margin: "24px 16px 0" }}>
           <div

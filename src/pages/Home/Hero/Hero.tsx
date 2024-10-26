@@ -17,7 +17,7 @@ const Hero = () => {
   return (
     <div>
       <div
-        className="hero min-h-screen "
+        className="hero min-h-[80vh] "
         style={{
           backgroundImage: `url(${car})`,
         }}

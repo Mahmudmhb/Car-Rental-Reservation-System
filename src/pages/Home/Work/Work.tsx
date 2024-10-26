@@ -1,5 +1,6 @@
 import bg from "../../../assets/image/a06e86e4-border_frame.png";
-
+import icon1 from "../../../assets/image/532cdaf4-icon-3.png";
+import icon2 from "../../../assets/image/5d1bce92-icon-4.png";
 const Work = () => {
   return (
     <div
@@ -13,11 +14,11 @@ const Work = () => {
         >
           <div className="flex justify-evenly min-h-72">
             <div className="flex flex-col justify-center items-center gap-5">
-              <img src="/src/assets/image/532cdaf4-icon-3.png" alt="" />
+              <img src={icon1} alt="" />
               <h1>Select Car</h1>
             </div>
             <div className="flex flex-col justify-center items-center ml-24 ">
-              <img src="/src/assets/image/5d1bce92-icon-4.png" alt="" />
+              <img src={icon2} alt="" />
               <h1 className="w-24 text-center pt-5">Define Your Booking</h1>
             </div>
           </div>
@@ -29,15 +30,14 @@ const Work = () => {
         >
           <div className="flex justify-evenly min-h-72">
             <div className="flex flex-col justify-center items-center gap-5">
-              <img src="/src/assets/image/532cdaf4-icon-3.png" alt="" />
+              <img src={icon1} alt="" />
               <h1 className="w-24 text-center">Confirm Your Payment</h1>
             </div>
             <div className="flex flex-col justify-center items-center ml-24 ">
-              <img src="/src/assets/image/5d1bce92-icon-4.png" alt="" />
+              <img src={icon2} alt="" />
               <h1>Enjoy Your Ride</h1>
             </div>
           </div>
-          <div></div>
         </div>
       </div>
     </div>
