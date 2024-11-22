@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import bg from "../../../src/assets/image/handsome-customer-checking-the-car-interior-e1631573837115.jpg";
 
 const teamMembers = [
   {
@@ -19,142 +20,132 @@ const teamMembers = [
     photo:
       "https://img.freepik.com/free-photo/successful-handsome-business-man-office_1303-20918.jpg",
   },
-];
-
-const fleetInfo = [
   {
-    category: "Economy",
-    description:
-      "Our economy cars are affordable and fuel-efficient, perfect for budget-conscious travelers. Whether you're going on a solo trip or with friends, these cars offer comfort, reliability, and great value.",
+    name: "Emily Davis",
+    role: "Chief Financial Officer",
+    photo:
+      "https://img.freepik.com/free-photo/young-smiling-businesswoman-working-laptop_329181-17308.jpg",
   },
   {
-    category: "Luxury",
-    description:
-      "Indulge in our luxury fleet for a refined driving experience. Our high-end vehicles are designed for those who value comfort, elegance, and top-notch performance during their journey.",
+    name: "David Brown",
+    role: "Head of Technology",
+    photo:
+      "https://img.freepik.com/free-photo/handsome-businessman-working-office-desk_329181-19407.jpg",
   },
   {
-    category: "SUVs",
-    description:
-      "Need more space for family or adventure? Our SUVs provide ample room, safety features, and comfort for both short and long trips. They are perfect for families and outdoor lovers.",
+    name: "Sophia Wilson",
+    role: "Customer Relations Manager",
+    photo:
+      "https://img.freepik.com/free-photo/happy-customer-support-girl-headset-working-office_58466-11287.jpg",
   },
 ];
 
 const AboutUs = () => {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white">
-      <motion.header
-        className="mb-12 text-center"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h1 className="text-4xl font-bold">About Us</h1>
-        <p className="mt-4 text-gray-200">
-          Learn more about our company's history, team, fleet, and our
-          commitment to customer service.
-        </p>
-      </motion.header>
+    <div className="bg-slate-50">
+      {/* Header Section */}
+      <div className="pt-20 mb-10 w-11/12 mx-auto p-3 rounded-2xl">
+        <motion.div
+          className="text-center space-y-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2 }}
+        >
+          <h3 className="text-[#234896]">Welcome to Our Company</h3>
+          <h1 className="text-[#050a15] text-5xl font-extrabold">
+            Learn About <span className="text-[#234896]">Our Journey</span>
+          </h1>
+          <p>
+            Discover our mission, meet our incredible team, and explore the
+            values that drive us to deliver exceptional service every day.
+          </p>
+        </motion.div>
 
-      <motion.section
-        className="mb-12"
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h2 className="text-3xl font-bold mb-4">Company History</h2>
-        <p className="text-gray-200">
-          Since our founding in 2005, we’ve been dedicated to providing
-          exceptional car rental services to our customers. Over the years, our
-          fleet has expanded to meet the diverse needs of travelers. Today, we
-          are a leader in the industry, recognized for our reliability and
-          customer-first approach. Our vision is to continue offering the best
-          in service, sustainability, and convenience, helping people enjoy
-          their journeys with ease and confidence.
-        </p>
-      </motion.section>
-
-      <motion.section
-        className="mb-12"
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h2 className="text-3xl font-bold mb-4">Our Team</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {teamMembers.map((member, index) => (
+        {/* Image and History Section */}
+        <div className="md:grid md:grid-cols-2 gap-8 md:min-h-[90vh] my-10">
+          <div>
             <motion.div
-              key={index}
-              className="bg-white text-gray-800 shadow-md rounded-lg p-6 text-center"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
+              className="hero h-full md:min-h-[80vh] rounded-2xl bg-cover bg-center"
+              style={{ backgroundImage: `url(${bg})` }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 2 }}
             >
-              <img
-                src={member.photo}
-                alt={member.name}
-                className="w-24 h-24 rounded-full mx-auto mb-4"
-              />
-              <h3 className="text-xl font-bold">{member.name}</h3>
-              <p className="text-gray-600">{member.role}</p>
+              <div className="hero-overlay bg-opacity-90"></div>
+              <div className="hero-content">
+                <div className="max-w-md space-y-10">
+                  <p className="text-[#ffd046]">About Our Beginnings</p>
+                  <h1 className="mb-5 text-5xl text-white font-bold">
+                    From Humble Beginnings to Industry Leaders
+                  </h1>
+                  <p className="mb-5 text-white">
+                    Founded in 2005, our company has grown from a small
+                    operation to a trusted name in the car rental industry. We
+                    are committed to providing top-notch service, sustainability
+                    practices, and unmatched customer experiences.
+                  </p>
+                </div>
+              </div>
             </motion.div>
-          ))}
-        </div>
-      </motion.section>
+          </div>
 
-      <motion.section
-        className="mb-12"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h2 className="text-3xl font-bold mb-4">Our Fleet</h2>
-        <div className="space-y-4">
-          {fleetInfo.map((fleet, index) => (
+          {/* Values and Commitment Section */}
+          <div>
             <motion.div
-              key={index}
-              className="bg-gray-800 p-4 rounded-lg shadow-md"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
+              className="space-y-10"
+              initial={{ x: -50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1 }}
             >
-              <h3 className="text-2xl font-semibold">{fleet.category}</h3>
-              <p className="text-gray-300">{fleet.description}</p>
+              <h2 className="text-3xl font-bold text-[#234896]">
+                Our Core Values
+              </h2>
+              <p>
+                Integrity, innovation, and customer satisfaction are at the
+                heart of everything we do. We strive to create a positive impact
+                by offering eco-friendly options and maintaining ethical
+                practices.
+              </p>
+              <h3 className="text-2xl font-semibold">Our Mission</h3>
+              <p>
+                To redefine car rental services with unparalleled convenience
+                and quality. Our goal is to ensure every customer feels valued
+                and supported throughout their journey.
+              </p>
             </motion.div>
-          ))}
+          </div>
         </div>
-      </motion.section>
 
-      <motion.section
-        className="mb-12"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h2 className="text-3xl font-bold mb-4">Values & Commitment</h2>
-        <p className="text-gray-200">
-          We are committed to delivering the highest level of customer
-          satisfaction. Our core values include integrity, quality, and
-          sustainability. We aim to provide eco-friendly vehicles and uphold
-          responsible practices in every aspect of our business.
-        </p>
-      </motion.section>
-
-      <motion.section
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        <h2 className="text-3xl font-bold mb-4">Contact Information</h2>
-        <div className="bg-white text-gray-800 p-6 rounded-lg shadow-md">
-          <p className="text-lg mb-2">
-            <strong>Phone:</strong> (123) 456-7890
-          </p>
-          <p className="text-lg mb-2">
-            <strong>Email:</strong> info@carrentalcompany.com
-          </p>
-          <p className="text-lg">
-            <strong>Address:</strong> 123 Main Street, Anytown, USA
-          </p>
-        </div>
-      </motion.section>
+        {/* Team Section */}
+        <motion.div
+          className="my-10"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <h2 className="text-3xl font-bold text-center text-[#234896] mb-10">
+            Meet Our Team
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            {teamMembers.map((member, index) => (
+              <motion.div
+                key={index}
+                className="bg-white text-gray-800 shadow-md rounded-lg p-6 text-center"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+              >
+                <img
+                  src={member.photo}
+                  alt={member.name}
+                  className="w-24 h-24 rounded-full mx-auto mb-4"
+                />
+                <h3 className="text-xl font-bold">{member.name}</h3>
+                <p className="text-gray-600">{member.role}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 };

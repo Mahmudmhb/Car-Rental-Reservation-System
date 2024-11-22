@@ -1,53 +1,92 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useForm } from "react-hook-form";
-import Car from "./car/Car";
-import { useAppDispatch, useAppSelector } from "../../redux/app/hook";
-import {
-  filterCars,
-  filteredCars,
-  setFilters,
-} from "../../redux/features/Car/CarSlice";
-import { useGetAllCarQuery } from "../../redux/features/Car/carApi";
 import { Button } from "antd";
+import { TCar } from "../../Component/Types/Types";
+import Car from "./car/Car";
+import { motion } from "framer-motion";
+import { filterCars, setFilters } from "../../redux/features/Car/CarSlice";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { useAppDispatch } from "../../redux/app/hook";
+import { useGetAllCarQuery } from "../../redux/features/Car/carApi";
 
 const CarListing = () => {
   const { data, isLoading } = useGetAllCarQuery(undefined);
-  const filterCarFromState = useAppSelector(filteredCars);
-
+  const [loadmore, setLoadmore] = useState(9);
+  const [filterCar, setFilterCar] = useState("");
   const { register, handleSubmit } = useForm();
   const dispatch = useAppDispatch();
+
   if (isLoading) {
     return <>loading.....</>;
   }
-  const cars = data?.data;
 
-  console.log(filterCarFromState);
+  const cars = data?.data;
 
   const carTypes = ["SUV", "Sedan", "Hatchback", "Convertible"];
   const priceRanges = [100, 500, 1000, 2000, 5000];
   const colors = ["Red", "Blue", "Black", "White", "Gray"];
-  const features = ["Sunroof", "Navigation", "Bluetooth", "Backup Camera"];
 
+  dispatch(setFilters(cars));
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (filterCriteria: any) => {
-    dispatch(setFilters(filterCriteria));
-    dispatch(filterCars());
+    dispatch(filterCars(filterCriteria!));
+    const filteredCars = cars.filter((car: TCar) => {
+      if (filterCriteria.carType && car.carType !== filterCriteria.carType) {
+        return false;
+      }
+      if (filterCriteria.color && car.color !== filterCriteria.color) {
+        return false;
+      }
+      return true;
+    });
+
+    setFilterCar(filteredCars);
   };
 
   return (
-    <div className="mt-20 w-11/12 mx-auto">
-      <div className="text-center space-y-4 my-5">
-        <h1 className="text-[#050a15] text-5xl font-extrabold">
-          Types of<span className="text-[#234896]"> Car Rantal</span> Cars
-        </h1>
-        <p>
-          At Car Rent BD, we offer a range of car rentals to cater to your
-          specific needs:
-        </p>
-      </div>
-      <div className="bg-white bg-opacity-75 p-2 w-full rounded-lg shadow-lg  mx-auto">
+    <div className="  mx-auto">
+      {/* Hero Section */}
+      {/* <HeroSection
+        title="Explore Our Car Rental Services"
+        subtitle=""
+      /> */}
+      <motion.div
+        className="min-h-screen bg-container text-white flex bg-fixed items-center justify-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5 }}
+      >
+        <motion.div
+          className="bg-[#fab637] bg-opacity-70 w-3/4 lg:w-1/2 mx-auto items-center justify-center text-center rounded-lg shadow-xl"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1.5 }}
+        >
+          <motion.h1
+            className="text-4xl mt-5 font-bold mb-8 text-white"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            Explore Our Car Rental Services
+          </motion.h1>
+          <div className="text-center space-y-4 my-5">
+            <h1 className="text-[#050a15] text-5xl font-extrabold">
+              Types of<span className="text-[#234896]"> Car Rantal</span> Cars
+            </h1>
+            <p>
+              At Car Rent BD, we offer a range of car rentals to cater to your
+              specific needs:
+            </p>
+          </div>
+        </motion.div>
+      </motion.div>
+      {/* Listing Section */}
+
+      <div className="bg-white w-11/12 bg-opacity-75 p-2 mt-10 rounded-lg shadow-lg  mx-auto">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="grid grid-cols-5 gap-4 items-center"
+          className="md:grid grid-cols-4 gap-4 justify-center items-center"
         >
           {/* Car Type Filter */}
           <div className="mb-4">
@@ -115,40 +154,34 @@ const CarListing = () => {
             </select>
           </div>
 
-          {/* Features Filter */}
-          <div className="mb-4">
-            <label
-              htmlFor="features"
-              className="block text-gray-700 font-semibold mb-2"
+          <div className=" w-full mt-3 ">
+            <Button
+              className="w-full  items-center bg-blue-500 text-white  rounded-md hover:bg-blue-600 transition duration-300"
+              htmlType="submit"
             >
-              Features
-            </label>
-            <select
-              id="color"
-              {...register("color")}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
-            >
-              <option value="">Select Features</option>
-              {features.map((color) => (
-                <option key={color} value={color}>
-                  {color}
-                </option>
-              ))}
-            </select>
+              Filter
+            </Button>
           </div>
-
-          <Button
-            className=" bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300"
-            htmlType="submit"
-          >
-            Filter
-          </Button>
         </form>
       </div>
       <div className=" my-10 grid md:grid-cols-3 gap-3 justify-center ">
-        {cars?.map((car: any) => (
-          <Car key={car._id} carItem={car} />
-        ))}
+        {(Array.isArray(filterCar) && filterCar.length > 0 ? filterCar : cars)
+          ?.slice(0, loadmore)
+          ?.map((car: TCar) => (
+            <Car key={car._id} carItem={car} />
+          ))}
+      </div>
+      <div className={`my-20 flex justify-center  `}>
+        {loadmore === cars?.length ? (
+          <></>
+        ) : (
+          <Button
+            onClick={() => setLoadmore(cars.length)}
+            className="bg-primary-color py-2  text-white"
+          >
+            More Rantel Cars <span aria-hidden="true"> &rarr;</span>
+          </Button>
+        )}
       </div>
     </div>
   );

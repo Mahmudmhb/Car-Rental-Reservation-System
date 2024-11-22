@@ -32,33 +32,43 @@ export const CarSlice = createSlice({
     carUpdate: (state, action) => {
       state.updateCar = action.payload;
     },
-
-    setFilters: (state, action: PayloadAction<Partial<Filters>>) => {
-      console.log(action);
-      state.filters = { ...state.filters, ...action.payload };
+    setFilters: (state, action) => {
+      state.filteredCars = action.payload;
+      console.log("filter car", action.payload);
     },
-    filterCars: (state) => {
-      console.log(state);
-      state.filteredCars = state.car.filter((item) => {
-        const matchesType = state.filters.carType
-          ? item.name
-              .toLowerCase()
-              .includes(state.filters.carType.toLowerCase())
-          : true;
+    filterCars: (state, action: PayloadAction<Partial<Filters>>) => {
+      const fontendAction = action.payload;
+      console.log("fontend action", fontendAction);
 
-        const matchesPrice =
-          item.pricePerHour >= state.filters.priceRange[0] &&
-          item.pricePerHour <= state.filters.priceRange[1];
-
-        const matchesFeatures =
-          Array.isArray(state.filters.features) &&
-          state.filters.features.every((feature) =>
-            item.features.includes(feature)
-          );
-
-        return matchesType && matchesPrice && matchesFeatures;
-      });
+      const filterCarTye = state.car.filter(
+        (item) => item.color == (fontendAction.color as unknown)
+      );
+      console.log(" filter car", state.filteredCars);
+      console.log("click ", filterCarTye);
     },
+    // filterCars: (state, action) => {
+    //   const filterCarFromdb = action.payload;
+    //   const
+    //   state.filters = state.car.filter((item) => {
+    //     const matchesType = statefilters.carType
+    //       ? item.name
+    //           .toLowerCase()
+    //           .includes(filters.filters.carType.toLowerCase())
+    //       : true;
+
+    //     const matchesPrice =
+    //       item.pricePerHour >= state.filters.priceRange[0] &&
+    //       item.pricePerHour <= state.filters.priceRange[1];
+
+    //     const matchesFeatures =
+    //       Array.isArray(state.filters.features) &&
+    //       state.filters.features.every((feature) =>
+    //         item.features.includes(feature)
+    //       );
+
+    //     return matchesType && matchesPrice && matchesFeatures;
+    //   });
+    // },
   },
 });
 

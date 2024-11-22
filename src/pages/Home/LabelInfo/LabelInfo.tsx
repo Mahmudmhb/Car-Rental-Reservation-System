@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import "./LabelInfo.css";
+import { Link } from "react-router-dom";
 
 const LabelInfo = () => {
   return (
@@ -44,7 +45,7 @@ const LabelInfo = () => {
                   }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  read more
+                  <Link to="/about-us"> read more</Link>
                 </motion.button>
               </div>
             </div>

@@ -32,12 +32,17 @@ const Car = ({ carItem }: TCarItem) => {
               {carItem.description.slice(0, 80)}...{" "}
               <span className="text-[#234896]">more</span>
             </p>
-            <div className="card-actions">
+            <div className="card-actions  duration-500 hover:translate-x-3 ">
               <Link
                 to={`/car-details/${carItem._id}`}
                 className="-mx-3 block rounded-lg px-3 py-2.5 hover:text-red-600 text-base font-semibold leading-7 text-gray-900"
               >
-                <Button> More Details</Button>
+                <Button>
+                  More Details
+                  <div className="">
+                    <span aria-hidden="true"> &rarr;</span>
+                  </div>
+                </Button>
               </Link>
             </div>
           </div>

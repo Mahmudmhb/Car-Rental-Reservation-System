@@ -4,6 +4,7 @@ import { useAppSelector } from "../../../redux/app/hook";
 import { useCar } from "../../../redux/features/Car/CarSlice";
 
 import { Link } from "react-router-dom";
+import { Button } from "antd";
 const FeaturedCars = () => {
   const useGetAllCar = useAppSelector(useCar);
   const letestProduct = [...useGetAllCar]?.sort(
@@ -30,9 +31,11 @@ const FeaturedCars = () => {
               <Car key={car._id} carItem={car} />
             ))}
           </div>
-          <div className="bg-primary-color py-1  flex my-5 justify-center  md:w-[20%] mx-auto text-white rounded-lg">
+          <div className=" py-1 hover:translate-x-3  duration-500 flex my-5 justify-center  md:w-[20%] mx-auto text-white rounded-lg">
             <Link to={`/car-listing`}>
-              <button>More Cars</button>
+              <Button className="bg-primary-color py-2  text-white">
+                More Rantel Cars <span aria-hidden="true"> &rarr;</span>
+              </Button>
             </Link>
           </div>
         </div>

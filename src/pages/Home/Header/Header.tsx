@@ -13,8 +13,8 @@ import { Button } from "antd";
 export const navigation = [
   { name: "Home", href: "/" },
   { name: "Car List", href: "/car-listing" },
-  { name: "Contact", href: "/contact-us" },
   { name: "About Us", href: "/about-us" },
+  { name: "Contact Us", href: "/contact-us" },
 ];
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -68,9 +68,9 @@ const Header = () => {
               <>
                 <Link to="/login">
                   {" "}
-                  <button className="text-sm bg-primary-color font-semibold leading-6 text-white px-3 py-1 rounded-lg">
+                  <Button className="bg-primary-color text-white">
                     Log in <span aria-hidden="true"> &rarr;</span>
-                  </button>
+                  </Button>
                 </Link>
               </>
             )}
