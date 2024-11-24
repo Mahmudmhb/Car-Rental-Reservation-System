@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useAppDispatch } from "../../redux/app/hook";
 import { useGetAllCarQuery } from "../../redux/features/Car/carApi";
 import CarLoading from "./CarLoading";
+import { Helmet } from "react-helmet-async";
 
 const CarListing = () => {
   const { data, isLoading } = useGetAllCarQuery(undefined);
@@ -42,6 +43,9 @@ const CarListing = () => {
 
   return (
     <div className="  mx-auto">
+      <Helmet>
+        <title>Car Listing - Car Rental Reservation System</title>
+      </Helmet>
       {/* Hero Section */}
       {/* <HeroSection
         title="Explore Our Car Rental Services"

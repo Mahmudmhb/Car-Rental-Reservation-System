@@ -1,10 +1,14 @@
 import { motion } from "framer-motion";
 import bg from "../../../src/assets/image/handsome-customer-checking-the-car-interior-e1631573837115.jpg";
+import { Helmet } from "react-helmet-async";
 
 const ContactPage = () => {
   return (
     <div className="mx-auto px-4">
       {/* Hero Section */}
+      <Helmet>
+        <title>Contact us - Car Rental Reservation System</title>
+      </Helmet>
       <motion.div
         className="min-h-screen bg-container my-20 text-white flex bg-fixed items-center justify-center"
         initial={{ opacity: 0 }}

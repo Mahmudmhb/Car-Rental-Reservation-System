@@ -10,6 +10,7 @@ import { Button } from "antd";
 import { useState } from "react";
 import { useCar } from "../../../redux/features/Car/CarSlice";
 import Car from "./Car";
+import { Helmet } from "react-helmet-async";
 
 const CarDetails = () => {
   const dispatch = useAppDispatch();
@@ -50,6 +51,9 @@ const CarDetails = () => {
         </>
       ) : (
         <>
+          <Helmet>
+            <title>{car?.name} - Car Rental Reservation System</title>
+          </Helmet>
           <div className="col-span-4 ">
             <h1 className="text-4xl font-bold mb-4">{car?.name}</h1>
 
@@ -106,14 +110,14 @@ const CarDetails = () => {
               </div>
             </div>
 
-            <Button className="bg-primary-color w-full text-white text-center rounded-lg">
-              <Link
-                to="/booking"
-                className=" py-3 rounded-md  transition duration-300"
-              >
+            <Link
+              to="/booking"
+              className=" py-3 rounded-md  transition duration-300"
+            >
+              <Button className="bg-primary-color w-full text-white text-center rounded-lg">
                 Book Now
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </div>
         </>
       )}

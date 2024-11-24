@@ -5,6 +5,7 @@ import { logoutUser } from "../../redux/features/auth/authSlice";
 import Sidebar from "./Sidebar/Sidebar";
 import { Header } from "antd/es/layout/layout";
 import { navigation } from "../../pages/Home/Header/Header";
+import { Helmet } from "react-helmet-async";
 
 const { Content } = Layout;
 
@@ -19,6 +20,9 @@ const Dashboard = () => {
   };
   return (
     <Layout>
+      <Helmet>
+        <title>Dashboard - Car Rental Reservation System</title>
+      </Helmet>
       <Sidebar />
       <Layout>
         <Header className="flex items-center">

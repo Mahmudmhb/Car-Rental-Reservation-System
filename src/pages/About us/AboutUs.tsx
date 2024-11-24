@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import bg from "../../../src/assets/image/handsome-customer-checking-the-car-interior-e1631573837115.jpg";
+import { Helmet } from "react-helmet-async";
 
 const teamMembers = [
   {
@@ -43,6 +44,9 @@ const teamMembers = [
 const AboutUs = () => {
   return (
     <div className="bg-slate-50">
+      <Helmet>
+        <title>About Us - Car Rental Reservation System</title>
+      </Helmet>
       {/* Header Section */}
       <div className="pt-20 mb-10 w-11/12 mx-auto p-3 rounded-2xl">
         <motion.div
