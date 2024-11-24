@@ -2,8 +2,8 @@ import { Button } from "antd";
 
 const CarLoading = () => {
   return (
-    <div className="p-6 rounded-xl transition-transform duration-300">
-      <div>
+    <div className="p-6 rounded-xl skeleton transition-transform duration-300">
+      <div className="skeleton">
         <div className="card rounded-xl overflow-hidden md:h-96 md:w-96">
           <figure className="relative">
             <img src="/" className="w-full object-cover" />

@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useAppDispatch } from "../../redux/app/hook";
 import { useGetAllCarQuery } from "../../redux/features/Car/carApi";
+import CarLoading from "./CarLoading";
 
 const CarListing = () => {
   const { data, isLoading } = useGetAllCarQuery(undefined);
@@ -14,10 +15,6 @@ const CarListing = () => {
   const [filterCar, setFilterCar] = useState("");
   const { register, handleSubmit } = useForm();
   const dispatch = useAppDispatch();
-
-  if (isLoading) {
-    return <>loading.....</>;
-  }
 
   const cars = data?.data;
 
@@ -82,6 +79,11 @@ const CarListing = () => {
         </motion.div>
       </motion.div>
       {/* Listing Section */}
+      {isLoading && (
+        <>
+          <CarLoading />
+        </>
+      )}
 
       <div className="bg-white w-11/12 bg-opacity-75 p-2 mt-10 rounded-lg shadow-lg  mx-auto">
         <form
